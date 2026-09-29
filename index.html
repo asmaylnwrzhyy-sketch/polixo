@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Polixo</title>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            background:
+                radial-gradient(circle at top right, #26304f 0%, transparent 35%),
+                radial-gradient(circle at bottom left, #171c36 0%, transparent 40%),
+                #080a12;
+            color: #fff;
+            font-family: Tahoma, Arial, sans-serif;
+            min-height: 100vh;
+            padding-bottom: 90px;
+        }
+
+        .app {
+            max-width: 520px;
+            margin: auto;
+            padding: 18px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #7c5cff, #4b36c8);
+            font-size: 23px;
+            box-shadow: 0 8px 25px rgba(95, 72, 255, .35);
+        }
+
+        .logo-name {
+            font-size: 21px;
+            font-weight: 800;
+        }
+
+        .logo-sub {
+            font-size: 11px;
+            color: #8f96ae;
+            margin-top: 3px;
+        }
+
+        .profile {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #171b2c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #292f49;
+        }
+
+        .balance-card {
+            background:
+                linear-gradient(135deg, rgba(124,92,255,.25), rgba(40,44,75,.15)),
+                #111525;
+            border: 1px solid #292f49;
+            border-radius: 24px;
+            padding: 22px;
+            box-shadow: 0 15px 40px rgba(0,0,0,.25);
+            margin-bottom: 15px;
+        }
+
+        .balance-title {
+            color: #9299b1;
+            font-size: 13px;
+            margin-bottom: 9px;
+        }
+
+        .balance {
+            font-size: 30px;
+            font-weight: 900;
+            letter-spacing: .3px;
+        }
+
+        .usd {
+            color: #9299b1;
+            font-size: 13px;
+            margin-top: 6px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .stat {
+            background: #111525;
+            border: 1px solid #242a43;
+            border-radius: 20px;
+            padding: 17px;
+        }
+
+        .stat-icon {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .stat-title {
+            color: #858ca5;
+            font-size: 12px;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 800;
+            margin-top: 5px;
+        }
+
+        .section-title {
+            font-size: 17px;
+            font-weight: 800;
+            margin: 20px 3px 12px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .card {
+            background: #111525;
+            border: 1px solid #242a43;
+            border-radius: 21px;
+            padding: 20px 15px;
+            min-height: 125px;
+            cursor: pointer;
+            transition: transform .15s ease, background .15s ease;
+        }
+
+        .card:active {
+            transform: scale(.96);
+            background: #171b2e;
+        }
+
+        .card-icon {
+            font-size: 29px;
+            margin-bottom: 13px;
+        }
+
+        .card-title {
+            font-weight: 800;
+            font-size: 14px;
+        }
+
+        .card-description {
+            color: #777f99;
+            font-size: 10px;
+            margin-top: 6px;
+        }
+
+        .invite-banner {
+            margin-top: 15px;
+            padding: 18px;
+            border-radius: 22px;
+            background: linear-gradient(135deg, #4c35c9, #7c5cff);
+            box-shadow: 0 14px 35px rgba(89,66,230,.25);
+        }
+
+        .invite-banner-title {
+            font-size: 16px;
+            font-weight: 900;
+        }
+
+        .invite-banner-text {
+            font-size: 12px;
+            opacity: .85;
+            margin-top: 7px;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(520px, 100%);
+            background: rgba(11,13,23,.94);
+            backdrop-filter: blur(18px);
+            border-top: 1px solid #242a43;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            padding: 10px 8px calc(10px + env(safe-area-inset-bottom));
+            z-index: 100;
+        }
+
+        .nav-item {
+            text-align: center;
+            color: #777f99;
+            font-size: 10px;
+            cursor: pointer;
+        }
+
+        .nav-icon {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .nav-item.active {
+            color: #8f78ff;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .back {
+            display: inline-block;
+            color: #8f78ff;
+            margin-bottom: 15px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .buy-item,
+        .task-item {
+            background: #111525;
+            border: 1px solid #242a43;
+            border-radius: 20px;
+            padding: 18px;
+            margin-bottom: 12px;
+        }
+
+        .buy-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .buy-title {
+            font-weight: 900;
+            font-size: 17px;
+        }
+
+        .buy-sub {
+            color: #858ca5;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        .buy-button {
+            border: 0;
+            background: linear-gradient(135deg, #7658ff, #4d36c8);
+            color: white;
+            padding: 11px 15px;
+            border-radius: 13px;
+            font-weight: 800;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 50px 20px;
+            color: #777f99;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- HOME -->
+    <div id="home" class="page active">
+
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon">P</div>
+                <div>
+                    <div class="logo-name">Polixo</div>
+                    <div class="logo-sub">پولیکس</div>
+                </div>
+            </div>
+
+            <div class="profile">👤</div>
+        </div>
+
+        <div class="balance-card">
+            <div class="balance-title">موجودی شما</div>
+            <div class="balance">۲۴۰,۰۰۰ تومان</div>
+            <div class="usd">≈ ۰٫۹۸ دلار</div>
+        </div>
+
+        <div class="stats">
+
+            <div class="stat">
+                <div class="stat-icon">🎡</div>
+                <div class="stat-title">گردونه‌های شما</div>
+                <div class="stat-value">۰</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-icon">🎲</div>
+                <div class="stat-title">تاس‌های شما</div>
+                <div class="stat-value">۰</div>
+            </div>
+
+        </div>
+
+        <div class="section-title">بخش‌های پولیکس</div>
+
+        <div class="grid">
+
+            <div class="card" onclick="openPage('wheel')">
+                <div class="card-icon">🎡</div>
+                <div class="card-title">گردونه</div>
+                <div class="card-description">گردونه شانس خود را بچرخانید</div>
+            </div>
+
+            <div class="card" onclick="openPage('game')">
+                <div class="card-icon">🎲</div>
+                <div class="card-title">بازی</div>
+                <div class="card-description">بازی و دریافت جایزه</div>
+            </div>
+
+            <div class="card" onclick="openPage('buy')">
+                <div class="card-icon">🛒</div>
+                <div class="card-title">خرید</div>
+                <div class="card-description">خرید گردونه با TRX</div>
+            </div>
+
+            <div class="card" onclick="openPage('invite')">
+                <div class="card-icon">👥</div>
+                <div class="card-title">دعوت دوستان</div>
+                <div class="card-description">هر دعوت = ۸ گردونه</div>
+            </div>
+
+            <div class="card" onclick="openPage('tasks')">
+                <div class="card-icon">📋</div>
+                <div class="card-title">تسک‌ها</div>
+                <div class="card-description">۵ گردونه + ۲ تاس</div>
+            </div>
+
+            <div class="card" onclick="openPage('withdraw')">
+                <div class="card-icon">💸</div>
+                <div class="card-title">برداشت</div>
+                <div class="card-description">حداقل برداشت ۱۰ میلیون</div>
+            </div>
+
+        </div>
+
+        <div class="invite-banner" onclick="openPage('invite')">
+            <div class="invite-banner-title">🎁 دوستانت رو دعوت کن!</div>
+            <div class="invite-banner-text">
+                برای هر دعوت موفق ۸ گردونه دریافت کن.
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- BUY -->
+    <div id="buy" class="page">
+
+        <div class="back" onclick="openPage('home')">‹ بازگشت</div>
+
+        <div class="section-title">🛒 خرید گردونه</div>
+
+        <div class="buy-item">
+            <div class="buy-row">
+                <div>
+                    <div class="buy-title">10 TRX</div>
+                    <div class="buy-sub">دریافت 11 گردونه</div>
+                </div>
+                <button class="buy-button">خرید</button>
+            </div>
+        </div>
+
+        <div class="buy-item">
+            <div class="buy-row">
+                <div>
+                    <div class="buy-title">20 TRX</div>
+                    <div class="buy-sub">دریافت 21 گردونه</div>
+                </div>
+                <button class="buy-button">خرید</button>
+            </div>
+        </div>
+
+        <div class="buy-item">
+            <div class="buy-row">
+                <div>
+                    <div class="buy-title">30 TRX</div>
+                    <div class="buy-sub">دریافت 31 گردونه</div>
+                </div>
+                <button class="buy-button">خرید</button>
+            </div>
+        </div>
+
+        <div class="buy-item">
+            <div class="buy-sub">
+                آدرس TRON:
+            </div>
+            <div style="margin-top:8px;font-size:11px;word-break:break-all;">
+                TBov6BQkMbsVmwHE7GbPvD2KG1KBqNqemi
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- WHEEL -->
+    <div id="wheel" class="page">
+        <div class="back" onclick="openPage('home')">‹ بازگشت</div>
+
+        <div class="section-title">🎡 گردونه شانس</div>
+
+        <div class="empty">
+            🎡<br><br>
+            این قسمت در مرحله بعد به سیستم واقعی گردونه متصل می‌شود.
+        </div>
+    </div>
+
+
+    <!-- GAME -->
+    <div id="game" class="page">
+        <div class="back" onclick="openPage('home')">‹ بازگشت</div>
+
+        <div class="section-title">🎲 بازی</div>
+
+        <div class="empty">
+            🎲<br><br>
+            بازی‌ها در مرحله بعد اضافه می‌شوند.
+        </div>
+    </div>
+
+
+    <!-- INVITE -->
+    <div id="invite" class="page">
+        <div class="back" onclick="openPage('home')">‹ بازگشت</div>
+
+        <div class="section-title">👥 دعوت دوستان</div>
+
+        <div class="balance-card">
+            <div class="balance-title">پاداش هر دعوت موفق</div>
+            <div class="balance">۸ 🎡</div>
+            <div class="usd">دوستت را دعوت کن و گردونه بگیر.</div>
+        </div>
+    </div>
+
+
+    <!-- TASKS -->
+    <div id="tasks" class="page">
+        <div class="back" onclick="openPage('home')">‹ بازگشت</div>
+
+        <div class="section-title">📋 تسک‌ها</div>
+
+        <div class="task-item">
+            <div style="font-weight:900;">
+                🎁 ۵ گردونه + ۲ تاس
+            </div>
+
+            <div style="color:#858ca5;font-size:12px;margin-top:8px;">
+                وارد ربات زیر شین و فعالش کنین؛
+                ۵ گردونه + ۲ تاس برنده شین.
+            </div>
+
+            <div style="margin-top:15px;">
+                <button
+                    class="buy-button"
+                    onclick="window.open('https://t.me/plus_game_bot?start=02361074727','_blank')">
+                    🚀 ورود به ربات
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- WITHDRAW -->
+    <div id="withdraw" class="page">
+        <div class="back" onclick="openPage('home')">‹ بازگشت</div>
+
+        <div class="section-title">💸 برداشت</div>
+
+        <div class="balance-card">
+            <div class="balance-title">حداقل مبلغ برداشت</div>
+            <div class="balance">۱۰,۰۰۰,۰۰۰ تومان</div>
+            <div class="usd">
+                موجودی کافی برای ثبت درخواست برداشت لازم است.
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- BOTTOM NAV -->
+
+<div class="bottom-nav">
+
+    <div class="nav-item active" onclick="openPage('home')">
+        <div class="nav-icon">🏠</div>
+        خانه
+    </div>
+
+    <div class="nav-item" onclick="openPage('wheel')">
+        <div class="nav-icon">🎡</div>
+        گردونه
+    </div>
+
+    <div class="nav-item" onclick="openPage('buy')">
+        <div class="nav-icon">🛒</div>
+        خرید
+    </div>
+
+    <div class="nav-item" onclick="openPage('invite')">
+        <div class="nav-icon">👥</div>
+        دعوت
+    </div>
+
+</div>
+
+
+<script>
+
+    function openPage(page) {
+
+        document.querySelectorAll(".page").forEach(function(item) {
+            item.classList.remove("active");
+        });
+
+        const target = document.getElementById(page);
+
+        if (target) {
+            target.classList.add("active");
+            window.scrollTo(0, 0);
+        }
+    }
+
+    if (window.Telegram && Telegram.WebApp) {
+        Telegram.WebApp.ready();
+        Telegram.WebApp.expand();
+    }
+
+</script>
+
+</body>
+</html>
