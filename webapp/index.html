@@ -1,572 +1,157 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-    <title>Polixo</title>
-
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-    <style>
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            margin: 0;
-            background:
-                radial-gradient(circle at top right, #26304f 0%, transparent 35%),
-                radial-gradient(circle at bottom left, #171c36 0%, transparent 40%),
-                #080a12;
-            color: #fff;
-            font-family: Tahoma, Arial, sans-serif;
-            min-height: 100vh;
-            padding-bottom: 90px;
-        }
-
-        .app {
-            max-width: 520px;
-            margin: auto;
-            padding: 18px;
-        }
-
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 18px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo-icon {
-            width: 46px;
-            height: 46px;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #7c5cff, #4b36c8);
-            font-size: 23px;
-            box-shadow: 0 8px 25px rgba(95, 72, 255, .35);
-        }
-
-        .logo-name {
-            font-size: 21px;
-            font-weight: 800;
-        }
-
-        .logo-sub {
-            font-size: 11px;
-            color: #8f96ae;
-            margin-top: 3px;
-        }
-
-        .profile {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: #171b2c;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #292f49;
-        }
-
-        .balance-card {
-            background:
-                linear-gradient(135deg, rgba(124,92,255,.25), rgba(40,44,75,.15)),
-                #111525;
-            border: 1px solid #292f49;
-            border-radius: 24px;
-            padding: 22px;
-            box-shadow: 0 15px 40px rgba(0,0,0,.25);
-            margin-bottom: 15px;
-        }
-
-        .balance-title {
-            color: #9299b1;
-            font-size: 13px;
-            margin-bottom: 9px;
-        }
-
-        .balance {
-            font-size: 30px;
-            font-weight: 900;
-            letter-spacing: .3px;
-        }
-
-        .usd {
-            color: #9299b1;
-            font-size: 13px;
-            margin-top: 6px;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 18px;
-        }
-
-        .stat {
-            background: #111525;
-            border: 1px solid #242a43;
-            border-radius: 20px;
-            padding: 17px;
-        }
-
-        .stat-icon {
-            font-size: 22px;
-            margin-bottom: 10px;
-        }
-
-        .stat-title {
-            color: #858ca5;
-            font-size: 12px;
-        }
-
-        .stat-value {
-            font-size: 20px;
-            font-weight: 800;
-            margin-top: 5px;
-        }
-
-        .section-title {
-            font-size: 17px;
-            font-weight: 800;
-            margin: 20px 3px 12px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-        }
-
-        .card {
-            background: #111525;
-            border: 1px solid #242a43;
-            border-radius: 21px;
-            padding: 20px 15px;
-            min-height: 125px;
-            cursor: pointer;
-            transition: transform .15s ease, background .15s ease;
-        }
-
-        .card:active {
-            transform: scale(.96);
-            background: #171b2e;
-        }
-
-        .card-icon {
-            font-size: 29px;
-            margin-bottom: 13px;
-        }
-
-        .card-title {
-            font-weight: 800;
-            font-size: 14px;
-        }
-
-        .card-description {
-            color: #777f99;
-            font-size: 10px;
-            margin-top: 6px;
-        }
-
-        .invite-banner {
-            margin-top: 15px;
-            padding: 18px;
-            border-radius: 22px;
-            background: linear-gradient(135deg, #4c35c9, #7c5cff);
-            box-shadow: 0 14px 35px rgba(89,66,230,.25);
-        }
-
-        .invite-banner-title {
-            font-size: 16px;
-            font-weight: 900;
-        }
-
-        .invite-banner-text {
-            font-size: 12px;
-            opacity: .85;
-            margin-top: 7px;
-        }
-
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: min(520px, 100%);
-            background: rgba(11,13,23,.94);
-            backdrop-filter: blur(18px);
-            border-top: 1px solid #242a43;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            padding: 10px 8px calc(10px + env(safe-area-inset-bottom));
-            z-index: 100;
-        }
-
-        .nav-item {
-            text-align: center;
-            color: #777f99;
-            font-size: 10px;
-            cursor: pointer;
-        }
-
-        .nav-icon {
-            font-size: 20px;
-            margin-bottom: 4px;
-        }
-
-        .nav-item.active {
-            color: #8f78ff;
-        }
-
-        .page {
-            display: none;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        .back {
-            display: inline-block;
-            color: #8f78ff;
-            margin-bottom: 15px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .buy-item,
-        .task-item {
-            background: #111525;
-            border: 1px solid #242a43;
-            border-radius: 20px;
-            padding: 18px;
-            margin-bottom: 12px;
-        }
-
-        .buy-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .buy-title {
-            font-weight: 900;
-            font-size: 17px;
-        }
-
-        .buy-sub {
-            color: #858ca5;
-            font-size: 11px;
-            margin-top: 5px;
-        }
-
-        .buy-button {
-            border: 0;
-            background: linear-gradient(135deg, #7658ff, #4d36c8);
-            color: white;
-            padding: 11px 15px;
-            border-radius: 13px;
-            font-weight: 800;
-        }
-
-        .empty {
-            text-align: center;
-            padding: 50px 20px;
-            color: #777f99;
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>POLIXO | پولیکس</title>
+<style>
+:root{--bg:#060605;--card:#11110e;--card2:#17150f;--gold:#efc65d;--gold2:#9c6d1d;--line:#5c4519;--text:#f5ead2;--muted:#918a7b}
+*{box-sizing:border-box}html,body{margin:0;background:radial-gradient(circle at 50% -10%,#2b210d 0,#0b0a07 28%,#050504 70%);color:var(--text);font-family:Tahoma,Arial,sans-serif}body{min-height:100vh}button,input,select{font:inherit}
+.app{width:min(100%,520px);margin:auto;padding:12px 14px 110px}.top{height:58px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #292115;margin-bottom:14px}.brand{font-size:23px;font-weight:900;color:var(--gold);letter-spacing:1px;text-align:center}.brand small{display:block;font-size:8px;color:#817966;letter-spacing:2px;margin-top:2px}.topicon{font-size:24px;color:#d9b455}
+.page{display:none}.page.active{display:block}.title{font-size:22px;font-weight:900;margin:10px 3px 14px}.muted{font-size:12px;line-height:1.9;color:var(--muted)}
+.card{background:linear-gradient(145deg,#17160f,#0c0c09);border:1px solid var(--line);border-radius:23px;padding:16px;margin:12px 0;box-shadow:0 12px 35px #0009}
+.profile{display:flex;align-items:center;justify-content:space-between}.user{display:flex;align-items:center;gap:10px}.avatar{width:49px;height:49px;border-radius:17px;border:1px solid #8d6924;background:#211b0d;display:grid;place-items:center;font-size:23px}.name b{display:block;font-size:15px}.name span{font-size:10px;color:#777}.balance{text-align:left}.balance b{font-size:17px;color:#efc55f}.balance span,.balance small{font-size:10px;color:#888}
+.hero{min-height:208px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center}.hero:after{content:"✦   ✧   ✦";position:absolute;left:15px;top:15px;color:#b88a3370;font-size:18px;letter-spacing:10px}.hero h1{margin:0 0 7px;color:#f1cc70;font-size:24px}.hero p{max-width:62%;margin:0 0 17px}.chest{position:absolute;left:15px;bottom:13px;font-size:72px;filter:drop-shadow(0 0 18px #d39b3c66)}
+.btn{border:1px solid #6b511f;background:#17140c;color:#efc45d;border-radius:15px;padding:12px 15px;cursor:pointer}.btn.gold{background:linear-gradient(135deg,#f4d276,#a57422);color:#171107;border-color:#f2c85d;font-weight:900}.btn.full{width:100%}
+.quick{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.tile{min-height:118px;text-align:center;padding:14px;border:1px solid #4e3c1b;border-radius:20px;background:linear-gradient(145deg,#15140f,#0d0d0b);cursor:pointer}.tile .ico{width:48px;height:48px;margin:auto auto 8px;border:1px solid #c39a42;border-radius:50%;display:grid;place-items:center;font-size:23px;box-shadow:0 0 18px #c18c3030}.tile b{display:block;font-size:13px}.tile small{font-size:9px;color:#777}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:#11110e;border:1px solid #342b1a;border-radius:15px;padding:10px;text-align:center}.stat b{display:block;color:#ebc05a;font-size:17px;margin:4px 0}.stat small{font-size:9px;color:#777}
+.nav{position:fixed;z-index:30;bottom:8px;left:50%;transform:translateX(-50%);width:min(calc(100% - 18px),510px);background:#0b0b0af5;border:1px solid #5d461c;border-radius:24px;padding:7px;box-shadow:0 12px 35px #000}.navin{display:grid;grid-template-columns:repeat(5,1fr)}.nav button{background:none;border:0;color:#7e786c;font-size:9px;padding:5px 2px;cursor:pointer}.nav button.active{color:#efc35b}.nav i{display:block;font-style:normal;font-size:20px;margin-bottom:4px}
+.wheelcard{text-align:center}
+.wheel-wrap{position:relative;width:min(75vw,285px);height:min(75vw,285px);margin:5px auto 18px}
+.wheel-wrap .wheel{margin:0;width:100%;height:100%;position:relative}
+.wheel-label{position:absolute;left:50%;top:50%;width:72px;text-align:center;
+ transform-origin:0 0;color:#fff3d0;font-weight:900;font-size:11px;line-height:1.15;
+ text-shadow:0 2px 4px #000;pointer-events:none}
+.wheel-label small{font-size:8px;font-weight:700}
+.l1{transform:rotate(-63deg) translate(43px,-8px)}
+.l2{transform:rotate(-12deg) translate(43px,-8px)}
+.l3{transform:rotate(39deg) translate(43px,-8px)}
+.l4{transform:rotate(90deg) translate(43px,-8px)}
+.l5{transform:rotate(141deg) translate(43px,-8px)}
+.l6{transform:rotate(192deg) translate(43px,-8px)}
+.l7{transform:rotate(243deg) translate(43px,-8px)}
+.pointer{font-size:30px;color:#efc35e;height:28px}.wheel{width:min(75vw,285px);height:min(75vw,285px);margin:5px auto 18px;border-radius:50%;border:8px solid #6d501d;background:conic-gradient(#d7aa43 0 51.43deg,#191916 51.43deg 102.86deg,#d7aa43 102.86deg 154.29deg,#191916 154.29deg 205.72deg,#d7aa43 205.72deg 257.15deg,#191916 257.15deg 308.58deg,#d7aa43 308.58deg);transition:transform 4s cubic-bezier(.12,.72,.18,1);box-shadow:0 0 35px #d0a03c33,inset 0 0 22px #000}.wheel:before{content:"POLIXO";position:absolute;inset:31%;background:#080806;border:3px solid #e7bd5b;border-radius:50%;display:grid;place-items:center;font-weight:900;color:#efc45f;font-size:14px}.prizes{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}.prize{border:1px solid #342a17;background:#11110e;border-radius:12px;padding:9px;font-size:11px}.prize strong{color:#edc15c}
+.dicebox{text-align:center}
+.dice-stage{margin:18px 0 10px;padding:16px 10px;border:1px solid #4a3918;border-radius:22px;
+background:radial-gradient(circle at center,#1c170b 0,#0b0b09 70%);box-shadow:inset 0 0 30px #000}
+.dice-caption{color:#efc35e;font-weight:900;font-size:15px;margin-bottom:12px}
+.die-card{display:flex;flex-direction:column;align-items:center;gap:7px}
+.die-name{font-size:11px;color:#bda978}
+.dicepair{margin:8px 0 4px}
+.die{width:105px;height:105px}
+.dicepair{display:flex;justify-content:center;gap:25px;margin:22px 0}.die{width:105px;height:105px;border:2px solid #b58732;border-radius:24px;background:linear-gradient(145deg,#211b0e,#0c0c09);display:grid;place-items:center;font-size:70px;box-shadow:0 0 25px #c38e3030}.shake{animation:shake .65s linear infinite}@keyframes shake{0%,100%{transform:rotate(0) translate(0)}25%{transform:rotate(-7deg) translate(-5px,3px)}50%{transform:rotate(7deg) translate(5px,-3px)}75%{transform:rotate(-5deg) translate(-3px,2px)}}
+.result{font-size:19px;color:#efc35d;font-weight:900;min-height:32px}.jackpot{color:#f5d477;font-size:14px;margin-top:7px}
+.package{display:flex;justify-content:space-between;align-items:center;gap:10px}.package b{font-size:20px;color:#efc15b}.package span{display:block;color:#aaa;font-size:11px;margin-top:5px}.link{background:#090907;border:1px dashed #59431c;padding:11px;border-radius:12px;word-break:break-all;color:#dcb45b;font-size:11px}input,select{width:100%;background:#0b0b09;color:#eee;border:1px solid #3b301c;border-radius:12px;padding:12px;margin:5px 0 9px;outline:none}
+</style>
 </head>
-
 <body>
-
 <div class="app">
+<div class="top"><div class="topicon">‹</div><div class="brand">POLIXO<small>PLAY • EARN • WITHDRAW</small></div><div class="topicon">⋮</div></div>
 
-    <!-- HOME -->
-    <div id="home" class="page active">
+<section id="home" class="page active">
+<div class="card profile"><div class="user"><div class="avatar">👤</div><div class="name"><b>پولیکس</b><span id="username">@کاربر</span></div></div><div class="balance">💰 <b id="balance">۰</b><span> تومان</span><small>≈ $0.00</small></div></div>
+<div class="card hero"><h1>به پولیکس خوش آمدید!</h1><p class="muted">بازی کنید، جایزه بگیرید و دوستانتان را دعوت کنید.</p><button class="btn gold" onclick="go('wheel')">🎮 شروع بازی</button><div class="chest">🪙</div></div>
+<div class="title">بازی‌ها و امکانات</div><div class="quick">
+<div class="tile" onclick="go('wheel')"><div class="ico">🎡</div><b>گردونه شانس</b><small>۷ جایزه ویژه</small></div>
+<div class="tile" onclick="go('dice')"><div class="ico">🎲</div><b>جفت شیش</b><small>تا ۵ میلیون تومان</small></div>
+<div class="tile" onclick="go('buy')"><div class="ico">🛒</div><b>خرید</b><small>بسته‌های گردونه</small></div>
+<div class="tile" onclick="go('invite')"><div class="ico">👥</div><b>دعوت دوستان</b><small>هر نفر +۸ گردونه</small></div>
+<div class="tile" onclick="go('tasks')"><div class="ico">📋</div><b>مأموریت‌ها</b><small>پاداش ویژه</small></div>
+<div class="tile" onclick="go('withdraw')"><div class="ico">💳</div><b>برداشت</b><small>تومان و TRX</small></div>
+</div>
+<div class="card"><div class="stats"><div class="stat">🎡<b id="wheels">۰</b><small>گردونه</small></div><div class="stat">🎲<b id="dice">۰</b><small>تاس</small></div><div class="stat">👥<b id="refs">۰</b><small>دعوت</small></div></div></div>
+<div class="card"><b>📣 اطلاعیه</b><p class="muted">به پولیکس خوش آمدید 🎉</p></div>
+</section>
 
-        <div class="header">
-            <div class="logo">
-                <div class="logo-icon">P</div>
-                <div>
-                    <div class="logo-name">Polixo</div>
-                    <div class="logo-sub">پولیکس</div>
-                </div>
-            </div>
+<section id="wheel" class="page">
+<div class="title">🎡 گردونه شانس</div><div class="card wheelcard"><div class="pointer">▼</div><div class="wheel-wrap">
+  <div id="wheelEl" class="wheel">
+    <div class="wheel-label l1">۲۷۰,۰۰۰<br><small>تومان</small></div>
+    <div class="wheel-label l2">پوچ</div>
+    <div class="wheel-label l3">۳۰,۰۰۰<br><small>تومان</small></div>
+    <div class="wheel-label l4">۵ تاس</div>
+    <div class="wheel-label l5">۸ تاس</div>
+    <div class="wheel-label l6">۱۴ تاس</div>
+    <div class="wheel-label l7">۲ گردونه</div>
+  </div>
+</div><button class="btn gold full" onclick="spin()">چرخاندن گردونه</button><p id="wheelMsg" class="muted">گردونه شما: <b id="wheelCount">۰</b></p></div>
+<div class="card"><b>جوایز</b><div class="prizes">
+<div class="prize">🪙 <strong>۲۷۰,۰۰۰ تومان</strong></div><div class="prize">❌ <strong>پوچ</strong></div>
+<div class="prize">🪙 <strong>۳۰,۰۰۰ تومان</strong></div><div class="prize">🎲 <strong>۵ تاس</strong></div>
+<div class="prize">🎲 <strong>۸ تاس</strong></div><div class="prize">🎲 <strong>۱۴ تاس</strong></div>
+<div class="prize">🎡 <strong>۲ گردونه</strong></div></div></div>
+</section>
 
-            <div class="profile">👤</div>
-        </div>
+<section id="dice" class="page">
+<div class="title">🎲 بازی جفت شیش</div>
+<div class="card dicebox"><p class="muted">دو تاس بینداز؛ اگر جفت بیاید، جایزه همان جفت را می‌بری.</p>
+<div class="dice-stage">
+  <div class="dice-caption">🎲 دو تاس بازی</div>
+  <div class="dicepair">
+    <div class="die-card"><span class="die-name">تاس اول</span><div id="d1" class="die">⚄</div></div>
+    <div class="die-card"><span class="die-name">تاس دوم</span><div id="d2" class="die">⚄</div></div>
+  </div>
+</div>
+<div id="diceResult" class="result">آماده‌ای؟</div><div id="dicePrize" class="jackpot"></div>
+<button class="btn gold full" onclick="rollDice()">🎲 پرتاب دو تاس</button><p class="muted">تاس‌های شما: <b id="diceCount">۰</b></p></div>
+<div class="card"><b>جدول جوایز جفت</b><div class="prizes" style="margin-top:10px">
+<div class="prize">🎲🎲 جفت ۶ <strong>۵,۰۰۰,۰۰۰ تومان</strong></div><div class="prize">🎲🎲 جفت ۵ <strong>۴,۰۰۰,۰۰۰ تومان</strong></div>
+<div class="prize">🎲🎲 جفت ۴ <strong>۳,۰۰۰,۰۰۰ تومان</strong></div><div class="prize">🎲🎲 جفت ۳ <strong>۲,۰۰۰,۰۰۰ تومان</strong></div>
+<div class="prize">🎲🎲 جفت ۲ <strong>۱,۰۰۰,۰۰۰ تومان</strong></div><div class="prize">🎲🎲 جفت ۱ <strong>۵۰۰,۰۰۰ تومان</strong></div>
+<div class="prize">🎲 دو عدد غیرجفت <strong>بدون جایزه</strong></div></div></div>
+</section>
 
-        <div class="balance-card">
-            <div class="balance-title">موجودی شما</div>
-            <div class="balance">۲۴۰,۰۰۰ تومان</div>
-            <div class="usd">≈ ۰٫۹۸ دلار</div>
-        </div>
+<section id="buy" class="page"><div class="title">🛒 خرید گردونه</div>
+<div class="card package"><div><b>۱۰ TRX</b><span>۱۱ گردونه</span></div><button class="btn gold" onclick="pay(10,11)">انتخاب</button></div>
+<div class="card package"><div><b>۲۰ TRX</b><span>۲۱ گردونه</span></div><button class="btn gold" onclick="pay(20,21)">انتخاب</button></div>
+<div class="card package"><div><b>۳۰ TRX</b><span>۳۱ گردونه</span></div><button class="btn gold" onclick="pay(30,31)">انتخاب</button></div>
+<div class="card"><b>آدرس پرداخت TRON</b><div class="link" style="margin-top:10px">TBov6BQkMbsVmwHE7GbPvD2KG1KBqNqemi</div><p class="muted">پس از پرداخت واقعی، تراکنش باید توسط سرور تأیید شود؛ قبل از تأیید هیچ گردونه‌ای اضافه نمی‌شود.</p></div></section>
 
-        <div class="stats">
+<section id="invite" class="page"><div class="title">👥 دعوت دوستان</div><div class="card"><b>هر دعوت موفق = ۸ گردونه 🎁</b><p class="muted">لینک اختصاصی شما:</p><div class="muted" style="margin-bottom:6px">لینک دعوت مخصوص ربات Plexinocf_bot</div><div id="refLink" class="link"></div><button class="btn gold full" style="margin-top:10px" onclick="copyRef()">کپی لینک</button></div><div class="card"><div class="stats"><div class="stat">👥<b id="r1">۰</b><small>دعوت موفق</small></div><div class="stat">🎡<b id="r2">۰</b><small>پاداش گردونه</small></div></div></div></section>
 
-            <div class="stat">
-                <div class="stat-icon">🎡</div>
-                <div class="stat-title">گردونه‌های شما</div>
-                <div class="stat-value">۰</div>
-            </div>
+<section id="tasks" class="page"><div class="title">📋 مأموریت‌ها</div><div class="card"><b>فعال‌سازی ربات</b><p class="muted">وارد ربات زیر شوید و فعالش کنید؛ ۵ گردونه + ۲ تاس برنده شوید 🎁</p><button class="btn gold full" onclick="window.open('https://t.me/plus_game_bot?start=02361074727','_blank')">ورود به ربات</button><button class="btn full" style="margin-top:8px" onclick="alert('در نسخه نهایی انجام مأموریت از سمت سرور بررسی می‌شود.')">بررسی مأموریت</button></div></section>
 
-            <div class="stat">
-                <div class="stat-icon">🎲</div>
-                <div class="stat-title">تاس‌های شما</div>
-                <div class="stat-value">۰</div>
-            </div>
+<section id="withdraw" class="page"><div class="title">💳 برداشت</div><div class="card"><b>حداقل برداشت تومان: ۱۰,۰۰۰,۰۰۰</b><p class="muted">نوع برداشت را انتخاب کنید.</p><select id="withdrawType"><option>تومان</option><option>TRX</option></select><input id="amount" type="number" placeholder="مبلغ"><input id="address" placeholder="شماره کارت یا آدرس TRX"><button class="btn gold full" onclick="withdraw()">ثبت درخواست</button></div></section>
 
-        </div>
-
-        <div class="section-title">بخش‌های پولیکس</div>
-
-        <div class="grid">
-
-            <div class="card" onclick="openPage('wheel')">
-                <div class="card-icon">🎡</div>
-                <div class="card-title">گردونه</div>
-                <div class="card-description">گردونه شانس خود را بچرخانید</div>
-            </div>
-
-            <div class="card" onclick="openPage('game')">
-                <div class="card-icon">🎲</div>
-                <div class="card-title">بازی</div>
-                <div class="card-description">بازی و دریافت جایزه</div>
-            </div>
-
-            <div class="card" onclick="openPage('buy')">
-                <div class="card-icon">🛒</div>
-                <div class="card-title">خرید</div>
-                <div class="card-description">خرید گردونه با TRX</div>
-            </div>
-
-            <div class="card" onclick="openPage('invite')">
-                <div class="card-icon">👥</div>
-                <div class="card-title">دعوت دوستان</div>
-                <div class="card-description">هر دعوت = ۸ گردونه</div>
-            </div>
-
-            <div class="card" onclick="openPage('tasks')">
-                <div class="card-icon">📋</div>
-                <div class="card-title">تسک‌ها</div>
-                <div class="card-description">۵ گردونه + ۲ تاس</div>
-            </div>
-
-            <div class="card" onclick="openPage('withdraw')">
-                <div class="card-icon">💸</div>
-                <div class="card-title">برداشت</div>
-                <div class="card-description">حداقل برداشت ۱۰ میلیون</div>
-            </div>
-
-        </div>
-
-        <div class="invite-banner" onclick="openPage('invite')">
-            <div class="invite-banner-title">🎁 دوستانت رو دعوت کن!</div>
-            <div class="invite-banner-text">
-                برای هر دعوت موفق ۸ گردونه دریافت کن.
-            </div>
-        </div>
-
-    </div>
-
-
-    <!-- BUY -->
-    <div id="buy" class="page">
-
-        <div class="back" onclick="openPage('home')">‹ بازگشت</div>
-
-        <div class="section-title">🛒 خرید گردونه</div>
-
-        <div class="buy-item">
-            <div class="buy-row">
-                <div>
-                    <div class="buy-title">10 TRX</div>
-                    <div class="buy-sub">دریافت 11 گردونه</div>
-                </div>
-                <button class="buy-button">خرید</button>
-            </div>
-        </div>
-
-        <div class="buy-item">
-            <div class="buy-row">
-                <div>
-                    <div class="buy-title">20 TRX</div>
-                    <div class="buy-sub">دریافت 21 گردونه</div>
-                </div>
-                <button class="buy-button">خرید</button>
-            </div>
-        </div>
-
-        <div class="buy-item">
-            <div class="buy-row">
-                <div>
-                    <div class="buy-title">30 TRX</div>
-                    <div class="buy-sub">دریافت 31 گردونه</div>
-                </div>
-                <button class="buy-button">خرید</button>
-            </div>
-        </div>
-
-        <div class="buy-item">
-            <div class="buy-sub">
-                آدرس TRON:
-            </div>
-            <div style="margin-top:8px;font-size:11px;word-break:break-all;">
-                TBov6BQkMbsVmwHE7GbPvD2KG1KBqNqemi
-            </div>
-        </div>
-
-    </div>
-
-
-    <!-- WHEEL -->
-    <div id="wheel" class="page">
-        <div class="back" onclick="openPage('home')">‹ بازگشت</div>
-
-        <div class="section-title">🎡 گردونه شانس</div>
-
-        <div class="empty">
-            🎡<br><br>
-            این قسمت در مرحله بعد به سیستم واقعی گردونه متصل می‌شود.
-        </div>
-    </div>
-
-
-    <!-- GAME -->
-    <div id="game" class="page">
-        <div class="back" onclick="openPage('home')">‹ بازگشت</div>
-
-        <div class="section-title">🎲 بازی</div>
-
-        <div class="empty">
-            🎲<br><br>
-            بازی‌ها در مرحله بعد اضافه می‌شوند.
-        </div>
-    </div>
-
-
-    <!-- INVITE -->
-    <div id="invite" class="page">
-        <div class="back" onclick="openPage('home')">‹ بازگشت</div>
-
-        <div class="section-title">👥 دعوت دوستان</div>
-
-        <div class="balance-card">
-            <div class="balance-title">پاداش هر دعوت موفق</div>
-            <div class="balance">۸ 🎡</div>
-            <div class="usd">دوستت را دعوت کن و گردونه بگیر.</div>
-        </div>
-    </div>
-
-
-    <!-- TASKS -->
-    <div id="tasks" class="page">
-        <div class="back" onclick="openPage('home')">‹ بازگشت</div>
-
-        <div class="section-title">📋 تسک‌ها</div>
-
-        <div class="task-item">
-            <div style="font-weight:900;">
-                🎁 ۵ گردونه + ۲ تاس
-            </div>
-
-            <div style="color:#858ca5;font-size:12px;margin-top:8px;">
-                وارد ربات زیر شین و فعالش کنین؛
-                ۵ گردونه + ۲ تاس برنده شین.
-            </div>
-
-            <div style="margin-top:15px;">
-                <button
-                    class="buy-button"
-                    onclick="window.open('https://t.me/plus_game_bot?start=02361074727','_blank')">
-                    🚀 ورود به ربات
-                </button>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- WITHDRAW -->
-    <div id="withdraw" class="page">
-        <div class="back" onclick="openPage('home')">‹ بازگشت</div>
-
-        <div class="section-title">💸 برداشت</div>
-
-        <div class="balance-card">
-            <div class="balance-title">حداقل مبلغ برداشت</div>
-            <div class="balance">۱۰,۰۰۰,۰۰۰ تومان</div>
-            <div class="usd">
-                موجودی کافی برای ثبت درخواست برداشت لازم است.
-            </div>
-        </div>
-    </div>
-
+<section id="profile" class="page"><div class="title">👤 پروفایل</div><div class="card"><p>شناسه کاربر: <b id="uid">دمو</b></p><p>موجودی: <b id="pbal">۰</b> تومان</p><p>گردونه: <b id="pwheel">۰</b></p><p>تاس: <b id="pdice">۰</b></p><p>دعوت موفق: <b id="pref">۰</b></p></div></section>
 </div>
 
-
-<!-- BOTTOM NAV -->
-
-<div class="bottom-nav">
-
-    <div class="nav-item active" onclick="openPage('home')">
-        <div class="nav-icon">🏠</div>
-        خانه
-    </div>
-
-    <div class="nav-item" onclick="openPage('wheel')">
-        <div class="nav-icon">🎡</div>
-        گردونه
-    </div>
-
-    <div class="nav-item" onclick="openPage('buy')">
-        <div class="nav-icon">🛒</div>
-        خرید
-    </div>
-
-    <div class="nav-item" onclick="openPage('invite')">
-        <div class="nav-icon">👥</div>
-        دعوت
-    </div>
-
-</div>
-
+<div class="nav"><div class="navin">
+<button data-page="home" class="active" onclick="go('home')"><i>⌂</i>خانه</button>
+<button data-page="wheel" onclick="go('wheel')"><i>◉</i>گردونه</button>
+<button data-page="dice" onclick="go('dice')"><i>🎲</i>جفت شیش</button>
+<button data-page="buy" onclick="go('buy')"><i>▣</i>خرید</button>
+<button data-page="invite" onclick="go('invite')"><i>♧</i>دعوت</button>
+</div></div>
 
 <script>
-
-    function openPage(page) {
-
-        document.querySelectorAll(".page").forEach(function(item) {
-            item.classList.remove("active");
-        });
-
-        const target = document.getElementById(page);
-
-        if (target) {
-            target.classList.add("active");
-            window.scrollTo(0, 0);
-        }
-    }
-
-    if (window.Telegram && Telegram.WebApp) {
-        Telegram.WebApp.ready();
-        Telegram.WebApp.expand();
-    }
-
+let S=JSON.parse(localStorage.getItem('polixo3')||'{"balance":0,"wheels":0,"dice":0,"refs":0}');
+const faces=['⚀','⚁','⚂','⚃','⚄','⚅'];
+const doublePrize={6:5000000,5:4000000,4:3000000,3:2000000,2:1000000,1:500000};
+function fa(n){return Number(n).toLocaleString('fa-IR')}
+function save(){localStorage.setItem('polixo3',JSON.stringify(S));render()}
+function render(){
+ const ids={balance:fa(S.balance),wheels:fa(S.wheels),dice:fa(S.dice),refs:fa(S.refs),wheelCount:fa(S.wheels),diceCount:fa(S.dice),r1:fa(S.refs),r2:fa(S.refs*8),pbal:fa(S.balance),pwheel:fa(S.wheels),pdice:fa(S.dice),pref:fa(S.refs)};
+ for(const [id,v] of Object.entries(ids)){let e=document.getElementById(id);if(e)e.textContent=v}
+ let u=window.Telegram?.WebApp?.initDataUnsafe?.user;
+ if(u){document.getElementById('username').textContent='@'+(u.username||u.first_name||'کاربر');document.getElementById('uid').textContent=u.id}
+ document.getElementById('refLink').textContent=u?'https://t.me/Plexinocf_bot?start=ref_'+u.id:'https://t.me/Plexinocf_bot?start=ref_demo';
+}
+function go(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));scrollTo(0,0)}
+function spin(){
+ if(S.wheels<1){document.getElementById('wheelMsg').textContent='❌ گردونه کافی ندارید.';return}
+ S.wheels--;save();let n=Math.floor(Math.random()*7),deg=1440+(360-(n*360/7+25))+Math.random()*35;
+ document.getElementById('wheelEl').style.transform='rotate('+deg+'deg)';
+ setTimeout(()=>{const p=[270000,0,30000,0,0,0,0][n];const d=[0,0,0,5,8,14,0][n];const w=[0,0,0,0,0,0,2][n];S.balance+=p;S.dice+=d;S.wheels+=w;save();const text=['۲۷۰,۰۰۰ تومان','پوچ','۳۰,۰۰۰ تومان','۵ تاس','۸ تاس','۱۴ تاس','۲ گردونه'][n];document.getElementById('wheelMsg').innerHTML='🎉 جایزه شما: <b>'+text+'</b>'},4100)
+}
+function rollDice(){
+ if(S.dice<1){document.getElementById('diceResult').textContent='❌ تاس کافی ندارید';return}
+ S.dice--;let a=1+Math.floor(Math.random()*6),b=1+Math.floor(Math.random()*6),x=document.getElementById('d1'),y=document.getElementById('d2');x.classList.add('shake');y.classList.add('shake');document.getElementById('dicePrize').textContent='';document.getElementById('diceResult').textContent='در حال پرتاب...';
+ setTimeout(()=>{x.classList.remove('shake');y.classList.remove('shake');x.textContent=faces[a-1];y.textContent=faces[b-1];if(a===b){let prize=doublePrize[a];S.balance+=prize;document.getElementById('diceResult').textContent='🎉 جفت '+a+' آوردی!';document.getElementById('dicePrize').textContent='💰 جایزه: '+fa(prize)+' تومان'}else{document.getElementById('diceResult').textContent='این بار جفت نشد 😅';document.getElementById('dicePrize').textContent=a+' + '+b+' = بدون جایزه'}save()},800)
+}
+function pay(a,w){alert('بسته '+a+' TRX انتخاب شد. در نسخه نهایی پس از تأیید تراکنش واقعی، '+w+' گردونه اضافه می‌شود.')}
+function copyRef(){navigator.clipboard?.writeText(document.getElementById('refLink').textContent);alert('لینک کپی شد')}
+function withdraw(){let t=document.getElementById('withdrawType').value,a=+document.getElementById('amount').value;if(t==='تومان'&&a<10000000){alert('حداقل برداشت ۱۰,۰۰۰,۰۰۰ تومان است');return}alert('درخواست ثبت شد؛ در نسخه نهایی توسط سرور بررسی می‌شود.')}
+render();if(window.Telegram?.WebApp){Telegram.WebApp.ready();Telegram.WebApp.expand()}
 </script>
-
-</body>
-</html>
+</body></html>
