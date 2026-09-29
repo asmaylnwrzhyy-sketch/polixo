@@ -20,59 +20,17 @@
 .dicebox{text-align:center}.dicepair{display:flex;justify-content:center;gap:25px;margin:22px 0}.die{width:105px;height:105px;border:2px solid #b58732;border-radius:24px;background:linear-gradient(145deg,#211b0e,#0c0c09);display:grid;place-items:center;font-size:70px;box-shadow:0 0 25px #c38e3030}.shake{animation:shake .65s linear infinite}@keyframes shake{0%,100%{transform:rotate(0) translate(0)}25%{transform:rotate(-7deg) translate(-5px,3px)}50%{transform:rotate(7deg) translate(5px,-3px)}75%{transform:rotate(-5deg) translate(-3px,2px)}}
 .result{font-size:19px;color:#efc35d;font-weight:900;min-height:32px}.jackpot{color:#f5d477;font-size:14px;margin-top:7px}
 .package{display:flex;justify-content:space-between;align-items:center;gap:10px}.package b{font-size:20px;color:#efc15b}.package span{display:block;color:#aaa;font-size:11px;margin-top:5px}.link{background:#090907;border:1px dashed #59431c;padding:11px;border-radius:12px;word-break:break-all;color:#dcb45b;font-size:11px}input,select{width:100%;background:#0b0b09;color:#eee;border:1px solid #3b301c;border-radius:12px;padding:12px;margin:5px 0 9px;outline:none}
+</style>
 
-/* POLIXO LUXURY DARK/GOLD */
-:root{--bg:#070706;--card:#11100d;--gold:#e5b84f;--gold2:#fff0b5;--line:#3a2b13;--muted:#a99b7c}
-body{
- background:
- radial-gradient(circle at 50% -10%,rgba(229,184,79,.13),transparent 32%),
- radial-gradient(circle at 0% 55%,rgba(229,184,79,.06),transparent 28%),
- linear-gradient(180deg,#080806 0%,#050505 100%) !important;
-}
-.card,.tile,.stat,.result{
- background:linear-gradient(145deg,rgba(24,22,17,.96),rgba(10,10,9,.98)) !important;
- border-color:#3b2d16 !important;
- box-shadow:0 12px 35px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.025) !important;
-}
-.hero{border:1px solid #57421d !important}
-.btn.gold{
- background:linear-gradient(135deg,#f4d477,#c7922f) !important;
- color:#171208 !important;
- box-shadow:0 8px 25px rgba(216,164,56,.2) !important;
-}
-.nav{
- background:rgba(9,9,8,.96) !important;
- border-top:1px solid #3a2b13 !important;
-}
-.nav button.active{color:#f0c55d !important}
-.wheel-wrap{position:relative;width:min(78vw,310px);height:min(78vw,310px);margin:4px auto 20px}
-.wheel-wrap .wheel{width:100%;height:100%;margin:0;position:relative}
-.wl{
- position:absolute;left:50%;top:50%;width:74px;margin-left:-37px;margin-top:-10px;
- text-align:center;color:#fff2bd;font-weight:1000;font-size:12px;line-height:1.1;
- text-shadow:0 2px 5px #000;pointer-events:none;
-}
-.wl1{transform:rotate(25.7deg) translateY(-105px) rotate(-25.7deg)}
-.wl2{transform:rotate(77.1deg) translateY(-105px) rotate(-77.1deg)}
-.wl3{transform:rotate(128.6deg) translateY(-105px) rotate(-128.6deg)}
-.wl4{transform:rotate(180deg) translateY(-105px) rotate(-180deg)}
-.wl5{transform:rotate(231.4deg) translateY(-105px) rotate(-231.4deg)}
-.wl6{transform:rotate(282.9deg) translateY(-105px) rotate(-282.9deg)}
-.wl7{transform:rotate(334.3deg) translateY(-105px) rotate(-334.3deg)}
-.dice-stage{
- padding:18px 10px;border:1px solid #4b3818;border-radius:24px;
- background:radial-gradient(circle at 50% 25%,#221b0d 0,#0b0b09 60%,#070706 100%);
- box-shadow:inset 0 0 35px #000,0 12px 30px rgba(0,0,0,.4);
-}
-.dice-heading{font-size:16px;font-weight:1000;color:#efc861;margin-bottom:14px}
-.dicepair{gap:20px !important;margin:8px 0 18px !important}
-.die-card{display:flex;flex-direction:column;align-items:center;gap:7px;color:#a99b7c;font-size:11px;font-weight:700}
-.die{
- width:105px !important;height:105px !important;border:2px solid #d3a53f !important;
- border-radius:24px !important;background:linear-gradient(145deg,#27200f,#0b0b09) !important;
- box-shadow:0 0 30px rgba(220,169,60,.12),inset 0 0 18px #000 !important;
-}
-
+<style>
+/* POLIXO FINAL LUXURY */
+body{background:radial-gradient(circle at 50% -10%,rgba(229,184,79,.16),transparent 34%),linear-gradient(180deg,#090908,#040404)!important}
+.card,.tile,.stat,.result,.panel{background:linear-gradient(145deg,#181611,#0b0b09)!important;border-color:#3c2c15!important;box-shadow:0 14px 38px rgba(0,0,0,.48),inset 0 1px rgba(255,255,255,.025)!important}
+.gold,.gold-btn,.primary{background:linear-gradient(135deg,#f3d477,#b98025)!important;color:#171108!important}
+.wheel-wrap{position:relative;width:min(78vw,300px);height:min(78vw,300px);margin:18px auto}.wheel-wrap .wheel{width:100%;height:100%;position:relative}
+.wheel-label{position:absolute;left:50%;top:50%;width:78px;margin:-10px 0 0 -39px;text-align:center;color:#fff0b8;font-weight:900;font-size:11px;line-height:1.15;text-shadow:0 2px 5px #000;pointer-events:none}
+.wl1{transform:rotate(25.7deg) translateY(-100px) rotate(-25.7deg)}.wl2{transform:rotate(77.1deg) translateY(-100px) rotate(-77.1deg)}.wl3{transform:rotate(128.6deg) translateY(-100px) rotate(-128.6deg)}.wl4{transform:rotate(180deg) translateY(-100px) rotate(-180deg)}.wl5{transform:rotate(231.4deg) translateY(-100px) rotate(-231.4deg)}.wl6{transform:rotate(282.9deg) translateY(-100px) rotate(-282.9deg)}.wl7{transform:rotate(334.3deg) translateY(-100px) rotate(-334.3deg)}
+.dice-stage-final{padding:16px 8px;margin-top:12px;border:1px solid #4a3618;border-radius:24px;background:radial-gradient(circle at center,#241b0b,#080807 70%);box-shadow:inset 0 0 35px #000}.dice-title-final{color:#edc35c;font-weight:900;font-size:16px;margin-bottom:12px}.dicepair{justify-content:center!important;gap:18px!important}.die{width:108px!important;height:108px!important;border:2px solid #d3a642!important;border-radius:24px!important;background:linear-gradient(145deg,#29200d,#090908)!important;box-shadow:inset 0 0 22px #000,0 12px 28px rgba(0,0,0,.6)!important}
 </style>
 </head>
 <body>
@@ -95,17 +53,7 @@ body{
 </section>
 
 <section id="wheel" class="page">
-<div class="title">🎡 گردونه شانس</div><div class="card wheelcard"><div class="pointer">▼</div><div class="wheel-wrap">
-      <div id="wheelEl" class="wheel">
-        <span class="wl wl1">۲۷۰هزار</span>
-        <span class="wl wl2">پوچ</span>
-        <span class="wl wl3">۳۰هزار</span>
-        <span class="wl wl4">۵ تاس</span>
-        <span class="wl wl5">۸ تاس</span>
-        <span class="wl wl6">۱۴ تاس</span>
-        <span class="wl wl7">۲ گردونه</span>
-      </div>
-    </div><button class="btn gold full" onclick="spin()">چرخاندن گردونه</button><p id="wheelMsg" class="muted">گردونه شما: <b id="wheelCount">۰</b></p></div>
+<div class="title">🎡 گردونه شانس</div><div class="card wheelcard"><div class="pointer">▼</div><div class="wheel-wrap"><div id="wheelEl" class="wheel"><span class="wheel-label wl1">۲۷۰,۰۰۰<br>تومان</span><span class="wheel-label wl2">پوچ</span><span class="wheel-label wl3">۳۰,۰۰۰<br>تومان</span><span class="wheel-label wl4">۵ تاس</span><span class="wheel-label wl5">۸ تاس</span><span class="wheel-label wl6">۱۴ تاس</span><span class="wheel-label wl7">۲ گردونه</span></div></div><button class="btn gold full" onclick="spin()">چرخاندن گردونه</button><p id="wheelMsg" class="muted">گردونه شما: <b id="wheelCount">۰</b></p></div>
 <div class="card"><b>جوایز</b><div class="prizes">
 <div class="prize">🪙 <strong>۲۷۰,۰۰۰ تومان</strong></div><div class="prize">❌ <strong>پوچ</strong></div>
 <div class="prize">🪙 <strong>۳۰,۰۰۰ تومان</strong></div><div class="prize">🎲 <strong>۵ تاس</strong></div>
@@ -116,13 +64,7 @@ body{
 <section id="dice" class="page">
 <div class="title">🎲 بازی جفت شیش</div>
 <div class="card dicebox"><p class="muted">دو تاس بینداز؛ اگر جفت بیاید، جایزه همان جفت را می‌بری.</p>
-<div class="dice-stage">
-      <div class="dice-heading">🎲 دو تاس جفت‌شیش</div>
-      <div class="dicepair">
-        <div class="die-card"><span>تاس اول</span><div id="d1" class="die">⚄</div></div>
-        <div class="die-card"><span>تاس دوم</span><div id="d2" class="die">⚄</div></div>
-      </div>
-    </div>
+<div class="dice-stage-final"><div class="dice-title-final">🎲 دو تاس بازی</div><div class="dicepair"><div id="d1" class="die">⚄</div><div id="d2" class="die">⚄</div></div>
 <div id="diceResult" class="result">آماده‌ای؟</div><div id="dicePrize" class="jackpot"></div>
 <button class="btn gold full" onclick="rollDice()">🎲 پرتاب دو تاس</button><p class="muted">تاس‌های شما: <b id="diceCount">۰</b></p></div>
 <div class="card"><b>جدول جوایز جفت</b><div class="prizes" style="margin-top:10px">
@@ -138,7 +80,7 @@ body{
 <div class="card package"><div><b>۳۰ TRX</b><span>۳۱ گردونه</span></div><button class="btn gold" onclick="pay(30,31)">انتخاب</button></div>
 <div class="card"><b>آدرس پرداخت TRON</b><div class="link" style="margin-top:10px">TBov6BQkMbsVmwHE7GbPvD2KG1KBqNqemi</div><p class="muted">پس از پرداخت واقعی، تراکنش باید توسط سرور تأیید شود؛ قبل از تأیید هیچ گردونه‌ای اضافه نمی‌شود.</p></div></section>
 
-<section id="invite" class="page"><div class="title">👥 دعوت دوستان</div><div class="card"><b>هر دعوت موفق = ۸ گردونه 🎁</b><p class="muted">لینک اختصاصی شما:</p><div class="muted" style="margin-bottom:6px">لینک دعوت شما</div><div id="refLink" class="link"></div><button class="btn gold full" style="margin-top:10px" onclick="copyRef()">کپی لینک</button></div><div class="card"><div class="stats"><div class="stat">👥<b id="r1">۰</b><small>دعوت موفق</small></div><div class="stat">🎡<b id="r2">۰</b><small>پاداش گردونه</small></div></div></div></section>
+<section id="invite" class="page"><div class="title">👥 دعوت دوستان</div><div class="card"><b>هر دعوت موفق = ۸ گردونه 🎁</b><p class="muted">لینک اختصاصی شما:</p><div id="refLink" class="link"></div><button class="btn gold full" style="margin-top:10px" onclick="copyRef()">کپی لینک</button></div><div class="card"><div class="stats"><div class="stat">👥<b id="r1">۰</b><small>دعوت موفق</small></div><div class="stat">🎡<b id="r2">۰</b><small>پاداش گردونه</small></div></div></div></section>
 
 <section id="tasks" class="page"><div class="title">📋 مأموریت‌ها</div><div class="card"><b>فعال‌سازی ربات</b><p class="muted">وارد ربات زیر شوید و فعالش کنید؛ ۵ گردونه + ۲ تاس برنده شوید 🎁</p><button class="btn gold full" onclick="window.open('https://t.me/plus_game_bot?start=02361074727','_blank')">ورود به ربات</button><button class="btn full" style="margin-top:8px" onclick="alert('در نسخه نهایی انجام مأموریت از سمت سرور بررسی می‌شود.')">بررسی مأموریت</button></div></section>
 
