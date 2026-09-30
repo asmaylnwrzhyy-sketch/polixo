@@ -1,130 +1,217 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>POLIXO | پولیکس</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#070b14">
+<title>POLIXO</title>
 <style>
-:root{--bg:#060605;--card:#11110e;--card2:#17150f;--gold:#efc65d;--gold2:#9c6d1d;--line:#5c4519;--text:#f5ead2;--muted:#918a7b}
-*{box-sizing:border-box}html,body{margin:0;background:radial-gradient(circle at 50% -10%,#2b210d 0,#0b0a07 28%,#050504 70%);color:var(--text);font-family:Tahoma,Arial,sans-serif}body{min-height:100vh}button,input,select{font:inherit}
-.app{width:min(100%,520px);margin:auto;padding:12px 14px 110px}.top{height:58px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #292115;margin-bottom:14px}.brand{font-size:23px;font-weight:900;color:var(--gold);letter-spacing:1px;text-align:center}.brand small{display:block;font-size:8px;color:#817966;letter-spacing:2px;margin-top:2px}.topicon{font-size:24px;color:#d9b455}
-.page{display:none}.page.active{display:block}.title{font-size:22px;font-weight:900;margin:10px 3px 14px}.muted{font-size:12px;line-height:1.9;color:var(--muted)}
-.card{background:linear-gradient(145deg,#17160f,#0c0c09);border:1px solid var(--line);border-radius:23px;padding:16px;margin:12px 0;box-shadow:0 12px 35px #0009}
-.profile{display:flex;align-items:center;justify-content:space-between}.user{display:flex;align-items:center;gap:10px}.avatar{width:49px;height:49px;border-radius:17px;border:1px solid #8d6924;background:#211b0d;display:grid;place-items:center;font-size:23px}.name b{display:block;font-size:15px}.name span{font-size:10px;color:#777}.balance{text-align:left}.balance b{font-size:17px;color:#efc55f}.balance span,.balance small{font-size:10px;color:#888}
-.hero{min-height:208px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center}.hero:after{content:"✦   ✧   ✦";position:absolute;left:15px;top:15px;color:#b88a3370;font-size:18px;letter-spacing:10px}.hero h1{margin:0 0 7px;color:#f1cc70;font-size:24px}.hero p{max-width:62%;margin:0 0 17px}.chest{position:absolute;left:15px;bottom:13px;font-size:72px;filter:drop-shadow(0 0 18px #d39b3c66)}
-.btn{border:1px solid #6b511f;background:#17140c;color:#efc45d;border-radius:15px;padding:12px 15px;cursor:pointer}.btn.gold{background:linear-gradient(135deg,#f4d276,#a57422);color:#171107;border-color:#f2c85d;font-weight:900}.btn.full{width:100%}
-.quick{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.tile{min-height:118px;text-align:center;padding:14px;border:1px solid #4e3c1b;border-radius:20px;background:linear-gradient(145deg,#15140f,#0d0d0b);cursor:pointer}.tile .ico{width:48px;height:48px;margin:auto auto 8px;border:1px solid #c39a42;border-radius:50%;display:grid;place-items:center;font-size:23px;box-shadow:0 0 18px #c18c3030}.tile b{display:block;font-size:13px}.tile small{font-size:9px;color:#777}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:#11110e;border:1px solid #342b1a;border-radius:15px;padding:10px;text-align:center}.stat b{display:block;color:#ebc05a;font-size:17px;margin:4px 0}.stat small{font-size:9px;color:#777}
-.nav{position:fixed;z-index:30;bottom:8px;left:50%;transform:translateX(-50%);width:min(calc(100% - 18px),510px);background:#0b0b0af5;border:1px solid #5d461c;border-radius:24px;padding:7px;box-shadow:0 12px 35px #000}.navin{display:grid;grid-template-columns:repeat(5,1fr)}.nav button{background:none;border:0;color:#7e786c;font-size:9px;padding:5px 2px;cursor:pointer}.nav button.active{color:#efc35b}.nav i{display:block;font-style:normal;font-size:20px;margin-bottom:4px}
-.wheelcard{text-align:center}.pointer{font-size:30px;color:#efc35e;height:28px}.wheel{width:min(75vw,285px);height:min(75vw,285px);margin:5px auto 18px;border-radius:50%;border:8px solid #6d501d;background:conic-gradient(#d7aa43 0 51.43deg,#191916 51.43deg 102.86deg,#d7aa43 102.86deg 154.29deg,#191916 154.29deg 205.72deg,#d7aa43 205.72deg 257.15deg,#191916 257.15deg 308.58deg,#d7aa43 308.58deg);transition:transform 4s cubic-bezier(.12,.72,.18,1);box-shadow:0 0 35px #d0a03c33,inset 0 0 22px #000}.wheel:before{content:"POLIXO";position:absolute;inset:31%;background:#080806;border:3px solid #e7bd5b;border-radius:50%;display:grid;place-items:center;font-weight:900;color:#efc45f;font-size:14px}.prizes{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}.prize{border:1px solid #342a17;background:#11110e;border-radius:12px;padding:9px;font-size:11px}.prize strong{color:#edc15c}
-.dicebox{text-align:center}.dicepair{display:flex;justify-content:center;gap:25px;margin:22px 0}.die{width:105px;height:105px;border:2px solid #b58732;border-radius:24px;background:linear-gradient(145deg,#211b0e,#0c0c09);display:grid;place-items:center;font-size:70px;box-shadow:0 0 25px #c38e3030}.shake{animation:shake .65s linear infinite}@keyframes shake{0%,100%{transform:rotate(0) translate(0)}25%{transform:rotate(-7deg) translate(-5px,3px)}50%{transform:rotate(7deg) translate(5px,-3px)}75%{transform:rotate(-5deg) translate(-3px,2px)}}
-.result{font-size:19px;color:#efc35d;font-weight:900;min-height:32px}.jackpot{color:#f5d477;font-size:14px;margin-top:7px}
-.package{display:flex;justify-content:space-between;align-items:center;gap:10px}.package b{font-size:20px;color:#efc15b}.package span{display:block;color:#aaa;font-size:11px;margin-top:5px}.link{background:#090907;border:1px dashed #59431c;padding:11px;border-radius:12px;word-break:break-all;color:#dcb45b;font-size:11px}input,select{width:100%;background:#0b0b09;color:#eee;border:1px solid #3b301c;border-radius:12px;padding:12px;margin:5px 0 9px;outline:none}
-</style>
+:root{
+ --bg:#05080f;--navy:#0a101d;--navy2:#111a2b;--navy3:#18243a;
+ --gold:#f2c75c;--gold2:#d99b22;--cream:#fff0c0;--text:#f4ead0;
+ --muted:#9ba3b2;--line:#70551e;--blue:#273753;--glow:#dcae3b;
+}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#03050a;color:var(--text);font-family:Tahoma,Arial,sans-serif}
+body{overflow-x:hidden}.app{max-width:760px;margin:auto;min-height:100vh;
+background:
+radial-gradient(circle at 80% 8%,#263b5d66 0,transparent 25%),
+radial-gradient(circle at 15% 35%,#172c4d55 0,transparent 28%),
+linear-gradient(180deg,#080d17,#05070c 65%,#020409)}
+.top{height:72px;padding:0 18px;display:flex;align-items:center;justify-content:space-between;
+background:#050810e8;border-bottom:1px solid #27344b;position:sticky;top:0;z-index:30;backdrop-filter:blur(16px)}
+.topbtn{border:0;background:none;color:#e9e5da;font-size:29px}.brand{text-align:center}.brand b{display:block;font-size:23px;letter-spacing:4px;color:#f5c952}.brand small{font-size:9px;letter-spacing:3px;color:#8993a4}
+.user{margin:15px 18px;padding:12px 15px;border:1px solid #6d541e;border-radius:27px;
+background:linear-gradient(110deg,#0b111d,#111a2b 60%,#0a0f19);display:flex;align-items:center;gap:13px;
+box-shadow:0 10px 30px #0007,inset 0 1px #ffffff08}
+.avatar{width:68px;height:68px;border-radius:23px;border:1px solid var(--gold);display:grid;place-items:center;font-size:31px;
+background:linear-gradient(145deg,#bd5bf1,#6f44c5);box-shadow:0 0 22px #9957df55}
+.uinfo{flex:1}.uinfo b{font-size:20px}.uinfo span{display:block;color:#a8afbb;margin-top:6px}.money{text-align:left;color:#aeb5c1;font-size:12px}.money strong{display:block;color:#fff0c4;font-size:19px;margin-bottom:5px}
+main{padding:0 18px 110px}.page{display:none}.page.active{display:block}
+.hero{height:190px;margin:15px 0;border:1px solid #6c531e;border-radius:28px;overflow:hidden;position:relative;padding:27px 24px;
+background:
+radial-gradient(circle at 76% 55%,#d69e2a44 0,transparent 20%),
+radial-gradient(circle at 88% 15%,#49648655 0,transparent 35%),
+linear-gradient(120deg,#080b12,#111b2d 55%,#070a11)}
+.hero:before{content:"";position:absolute;width:180px;height:180px;border-radius:50%;right:-75px;top:-35px;border:2px solid #c18e2e66;box-shadow:0 0 35px #d3a13b22}
+.hero:after{content:"✦";position:absolute;left:30px;bottom:20px;color:#d7a83e77;font-size:65px}
+.hero h1{margin:0 0 12px;font-size:28px;color:#ffe6a0;position:relative;z-index:2}.hero p{color:#bdc1ca;line-height:2;margin:0;position:relative;z-index:2}
+.gold{border:0;border-radius:17px;padding:13px 28px;font-weight:900;color:#201707;background:linear-gradient(180deg,#ffe078,#d89e25);
+box-shadow:0 8px 24px #b77e1f44}.section{font-size:25px;color:#f5e2a6;margin:24px 3px 13px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.tile{min-height:155px;padding:18px;border-radius:24px;border:1px solid #5d481d;
+background:linear-gradient(145deg,#111a29,#080d16);box-shadow:inset 0 0 25px #0007}.tile .icon{font-size:45px;display:block;margin-bottom:9px}.tile h3{margin:0 0 8px;color:#f5e3ad}.tile p{margin:0;color:#9da5b2;font-size:12px}
+.card{border:1px solid #604a1d;border-radius:25px;background:linear-gradient(145deg,#121b2b,#090d15);padding:19px;margin:14px 0;box-shadow:0 12px 35px #0006,inset 0 1px #ffffff07}
+.guide{border:1px solid #4c401f;border-radius:22px;padding:16px;background:linear-gradient(120deg,#171d29,#0c111a);color:#e9d8a8}.guide p{color:#aeb3bd;line-height:2;margin:7px 0}
+.nav{position:fixed;z-index:40;bottom:10px;left:50%;transform:translateX(-50%);width:min(724px,calc(100% - 12px));
+display:grid;grid-template-columns:repeat(7,1fr);padding:7px 4px;border:1px solid #4b3a1a;border-radius:28px;background:#060911ee;backdrop-filter:blur(18px);box-shadow:0 -5px 30px #0009}
+.nav button{border:0;background:none;color:#858d9c;font-size:9px;padding:3px 0}.nav b{display:block;font-size:22px;margin-bottom:3px}.nav .on{color:#f4c955}.nav .on b{width:47px;margin:auto auto 3px;padding:5px 0;border-radius:15px;background:linear-gradient(#ffe78a,#d69a20);color:#261b08;box-shadow:0 0 18px #e2b34255}
+.wheelbox{text-align:center;padding:15px;overflow:hidden}.pointer{font-size:30px;color:#ffe078}.wheel{width:min(330px,82vw);height:min(330px,82vw);margin:8px auto 18px;border-radius:50%;border:12px solid #c79327;position:relative;
+background:conic-gradient(#d49a21 0 51deg,#101724 51deg 102deg,#d49a21 102deg 154deg,#101724 154deg 205deg,#d49a21 205deg 257deg,#101724 257deg 308deg,#d49a21 308deg);
+box-shadow:0 0 0 5px #273550,0 0 45px #d19a2e33}
+.wheel:after{content:"POLIXO";position:absolute;inset:35%;display:grid;place-items:center;border-radius:50%;background:#080b11;border:3px solid #d8aa39;color:#f3cb64;font-weight:900}
+.pr{position:absolute;inset:0;font-size:12px;font-weight:900;color:#fff0c0;text-shadow:0 2px 4px #000}.pr span{position:absolute;white-space:nowrap}.p1{top:12%;left:50%;transform:translateX(-50%)}.p2{top:29%;right:8%}.p3{top:58%;right:5%}.p4{bottom:10%;right:23%}.p5{bottom:10%;left:23%}.p6{top:58%;left:5%}.p7{top:29%;left:8%}
+.dice{display:flex;justify-content:center;gap:30px;padding:30px 0}.die{width:112px;height:112px;border-radius:25px;border:5px solid #e6b63d;background:linear-gradient(145deg,#ffe080,#b97d16);box-shadow:inset 0 0 18px #fff5,0 10px 25px #0008;display:grid;place-items:center}.dots{width:72px;height:72px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:4px}.pip{width:15px;height:15px;background:#17130c;border-radius:50%;align-self:center;justify-self:center}.hide{visibility:hidden}
+.package,.task{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid #55421d;border-radius:20px;padding:16px;margin:10px 0;background:#0d1420}.package strong{font-size:20px;color:#f5dda0}.mini{color:#9ea7b4;font-size:12px;line-height:2}.darkbtn{border:1px solid #8a6824;background:#15140f;color:#ffe3a0;border-radius:14px;padding:10px 15px}
+input{width:100%;padding:15px;margin:7px 0;background:#070a10;color:white;border:1px solid #5c481d;border-radius:15px;outline:none}.toast{display:none;position:fixed;top:82px;left:50%;transform:translateX(-50%);z-index:60;background:#111827;border:1px solid #9b7427;border-radius:15px;padding:12px 17px;color:#ffe5a2}
+@media(max-width:430px){.hero{height:185px}.hero h1{font-size:26px}.grid{gap:9px}.tile{min-height:145px;padding:14px}.tile .icon{font-size:40px}}
 
-<style>
-/* POLIXO FINAL LUXURY */
-body{background:radial-gradient(circle at 50% -10%,rgba(229,184,79,.16),transparent 34%),linear-gradient(180deg,#090908,#040404)!important}
-.card,.tile,.stat,.result,.panel{background:linear-gradient(145deg,#181611,#0b0b09)!important;border-color:#3c2c15!important;box-shadow:0 14px 38px rgba(0,0,0,.48),inset 0 1px rgba(255,255,255,.025)!important}
-.gold,.gold-btn,.primary{background:linear-gradient(135deg,#f3d477,#b98025)!important;color:#171108!important}
-.wheel-wrap{position:relative;width:min(78vw,300px);height:min(78vw,300px);margin:18px auto}.wheel-wrap .wheel{width:100%;height:100%;position:relative}
-.wheel-label{position:absolute;left:50%;top:50%;width:78px;margin:-10px 0 0 -39px;text-align:center;color:#fff0b8;font-weight:900;font-size:11px;line-height:1.15;text-shadow:0 2px 5px #000;pointer-events:none}
-.wl1{transform:rotate(25.7deg) translateY(-100px) rotate(-25.7deg)}.wl2{transform:rotate(77.1deg) translateY(-100px) rotate(-77.1deg)}.wl3{transform:rotate(128.6deg) translateY(-100px) rotate(-128.6deg)}.wl4{transform:rotate(180deg) translateY(-100px) rotate(-180deg)}.wl5{transform:rotate(231.4deg) translateY(-100px) rotate(-231.4deg)}.wl6{transform:rotate(282.9deg) translateY(-100px) rotate(-282.9deg)}.wl7{transform:rotate(334.3deg) translateY(-100px) rotate(-334.3deg)}
-.dice-stage-final{padding:16px 8px;margin-top:12px;border:1px solid #4a3618;border-radius:24px;background:radial-gradient(circle at center,#241b0b,#080807 70%);box-shadow:inset 0 0 35px #000}.dice-title-final{color:#edc35c;font-weight:900;font-size:16px;margin-bottom:12px}.dicepair{justify-content:center!important;gap:18px!important}.die{width:108px!important;height:108px!important;border:2px solid #d3a642!important;border-radius:24px!important;background:linear-gradient(145deg,#29200d,#090908)!important;box-shadow:inset 0 0 22px #000,0 12px 28px rgba(0,0,0,.6)!important}
+/* POLIXO FIRE / GOLD cinematic skin */
+:root{--gold:#ffd45a;--gold2:#e6a62b;--cream:#fff4cf;--text:#f7efd9;--muted:#a9a7a0;--line:#8a641e;--blue:#18304a;--fire:#ff7a18;--fire2:#ffb52e}
+body{background:#020305;background-image:radial-gradient(circle at 50% 0%,rgba(255,154,36,.15),transparent 22%),radial-gradient(circle at 20% 35%,rgba(255,106,0,.08),transparent 28%),radial-gradient(circle at 85% 70%,rgba(16,65,105,.16),transparent 30%)}
+.app{max-width:720px;background:radial-gradient(circle at 50% 12%,rgba(255,177,55,.12),transparent 25%),radial-gradient(circle at 0 55%,rgba(255,91,0,.07),transparent 28%),linear-gradient(180deg,#03070d 0%,#07101b 45%,#020406 100%);position:relative;overflow:hidden}
+.app:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.4;background-image:radial-gradient(circle,rgba(255,210,100,.7) 0 1px,transparent 1.5px);background-size:47px 63px;animation:sparkDrift 8s linear infinite}
+@keyframes sparkDrift{to{background-position:47px 63px}}
+.cinematic-head{text-align:center;padding:22px 12px 10px}.brand-fire{font-size:40px;letter-spacing:2px;font-weight:900;background:linear-gradient(180deg,#fff3a6,#ffc02e 55%,#d87908);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 20px rgba(255,157,27,.25)}.crown{display:block;font-size:25px;color:#ffd85b;line-height:.7}.tagline{color:#a79b83;font-size:11px;letter-spacing:3px;margin-top:6px}
+.profile-fire{display:flex!important;align-items:center;gap:12px;border-color:#9b701f!important;background:linear-gradient(135deg,rgba(15,25,38,.95),rgba(5,8,12,.96))!important;box-shadow:0 0 22px rgba(255,145,25,.08),inset 0 0 25px rgba(255,187,66,.03)}
+.avatar-fire{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;border:2px solid #e8b63d;background:radial-gradient(circle,#3c5062,#0a0e13);color:#ffd45a;font-size:30px;box-shadow:0 0 18px rgba(255,173,38,.22)}
+.profile-copy{display:flex;flex-direction:column;flex:1}.profile-copy b{font-size:17px}.profile-copy span{font-size:11px;color:#9f9788;margin-top:4px}.balance-fire{text-align:left}.balance-fire small{display:block;color:#aaa08e;font-size:10px}.balance-fire strong{font-size:18px;color:#ffe28c}
+.hero-fire{margin:12px 14px 20px;min-height:245px;border:1px solid #9b6d1b;border-radius:26px;position:relative;overflow:hidden;padding:32px 24px;background:radial-gradient(circle at 25% 85%,rgba(255,117,0,.38),transparent 24%),radial-gradient(circle at 75% 15%,rgba(255,185,45,.18),transparent 28%),linear-gradient(145deg,#070c12,#0b1118 48%,#090a0c);box-shadow:0 0 35px rgba(255,111,0,.12),inset 0 0 40px rgba(255,174,45,.04)}
+.hero-fire:after{content:"";position:absolute;left:-10%;right:-10%;bottom:-70px;height:150px;background:radial-gradient(ellipse at center,rgba(255,104,0,.6),rgba(255,173,39,.12) 35%,transparent 68%);filter:blur(18px);animation:flamePulse 2.2s ease-in-out infinite alternate}
+@keyframes flamePulse{to{transform:scale(1.08);opacity:.72}}
+.fire-orb{position:absolute;border-radius:50%;filter:blur(22px);opacity:.5}.orb1{width:160px;height:160px;left:-50px;bottom:-70px;background:#ff6200}.orb2{width:100px;height:100px;right:-20px;top:-25px;background:#ffb51d}
+.spark{position:absolute;color:#ffd76a;text-shadow:0 0 12px #ff7b00;animation:floatSpark 2.5s ease-in-out infinite}.s1{left:12%;top:22%;font-size:20px}.s2{right:25%;bottom:25%;font-size:14px;animation-delay:.7s}.s3{right:10%;top:40%;font-size:18px;animation-delay:1.3s}@keyframes floatSpark{50%{transform:translateY(-14px) scale(1.2);opacity:.5}}
+.treasure{position:absolute;left:20px;bottom:20px;width:125px;height:95px;border-radius:55% 55% 22px 22px;display:grid;place-items:center;font-size:62px;color:#ffd65d;background:radial-gradient(circle,#70450d,#17110a 68%);border:1px solid #9e7020;box-shadow:0 0 28px rgba(255,126,0,.35),inset 0 0 25px rgba(255,192,53,.16);transform:rotate(-5deg)}
+.hero-copy{position:relative;z-index:2;text-align:right;margin-right:115px}.hero-copy h1{font-size:27px;margin:5px 0 14px;color:#ffe7a0}.hero-copy p{line-height:2;color:#c8bda7;font-size:14px}.fire-btn{min-width:190px;box-shadow:0 0 25px rgba(255,157,27,.38)!important}.fire-btn span{font-size:12px;margin-right:8px}
+.fire-title{color:#ffe6a1;text-shadow:0 0 15px rgba(255,150,20,.12)}.fire-grid{grid-template-columns:repeat(3,1fr)!important;gap:9px!important}.fire-tile{min-height:125px!important;background:linear-gradient(160deg,rgba(19,30,42,.92),rgba(6,9,13,.96))!important;border-color:#73551c!important;box-shadow:0 8px 25px rgba(0,0,0,.28),inset 0 0 18px rgba(255,178,40,.025)!important}.fire-tile .icon{filter:drop-shadow(0 0 8px rgba(255,166,30,.38));font-size:35px!important}.fire-tile h3{font-size:13px!important}.fire-tile p{font-size:10px!important;color:#a79e8d}
+.gift-banner{margin:14px 12px 92px;border:1px solid #76561e;border-radius:18px;padding:13px;display:flex;align-items:center;gap:12px;background:linear-gradient(100deg,#0c1724,#11100c);box-shadow:0 0 25px rgba(255,136,18,.1)}.gift-icon{font-size:38px;filter:drop-shadow(0 0 9px #ff9d1b)}.gift-banner div:nth-child(2){flex:1}.gift-banner b{display:block;color:#ffe5a0;font-size:14px}.gift-banner span{display:block;color:#9f9788;font-size:10px;margin-top:5px}.gift-banner>strong{color:#ffd45a;font-size:24px}
+.page .hero{background:linear-gradient(145deg,rgba(16,27,40,.95),rgba(7,10,14,.98));border-color:#76561d;box-shadow:0 0 28px rgba(255,135,20,.08)}.card,.guide,.task,.package{background:linear-gradient(145deg,rgba(17,25,34,.94),rgba(7,10,13,.97))!important;border-color:#75551b!important}.gold{background:linear-gradient(180deg,#ffe27a,#e9a72b 65%,#b86b0b)!important;color:#17110a!important;border:1px solid #ffdb68!important;box-shadow:0 0 18px rgba(255,159,27,.2)}.nav{background:rgba(3,7,12,.96)!important;border-color:#75551b!important;box-shadow:0 -8px 30px rgba(0,0,0,.65),0 0 20px rgba(255,143,22,.06)}.nav button.on{color:#fff0b0!important;text-shadow:0 0 10px rgba(255,179,47,.55)}.nav button.on b{background:linear-gradient(180deg,#ffe78d,#d99018)!important;color:#17110a!important;box-shadow:0 0 18px rgba(255,159,30,.3)}
+@media(max-width:430px){.brand-fire{font-size:34px}.hero-fire{min-height:235px;padding:27px 18px}.hero-copy{margin-right:90px}.hero-copy h1{font-size:22px}.hero-copy p{font-size:12px}.treasure{width:105px;height:78px;font-size:48px}.fire-grid{grid-template-columns:repeat(3,1fr)!important}.fire-tile{min-height:112px!important;padding:10px 5px!important}.fire-tile .icon{font-size:29px!important}}
+
+
+/* TELEGRAM MINI APP OPTIMIZATION */
+html,body{
+  width:100%;
+  min-height:100%;
+  margin:0;
+  overscroll-behavior:none;
+  -webkit-tap-highlight-color:transparent;
+  background:#020305;
+}
+body{
+  padding-top:env(safe-area-inset-top);
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.app{
+  width:100%;
+  max-width:720px;
+  min-height:100dvh;
+  margin:0 auto;
+}
+.top{
+  padding-top:2px;
+}
+main{
+  padding-left:max(14px,env(safe-area-inset-left));
+  padding-right:max(14px,env(safe-area-inset-right));
+  padding-bottom:calc(118px + env(safe-area-inset-bottom));
+}
+.nav{
+  bottom:max(8px,env(safe-area-inset-bottom));
+  width:min(710px,calc(100% - 10px));
+}
+button,input{
+  touch-action:manipulation;
+}
+button:active{
+  transform:scale(.97);
+}
+@media(max-width:430px){
+  .top{height:64px;padding-left:12px;padding-right:12px}
+  .user{margin:10px 10px;padding:10px 12px;border-radius:22px}
+  .avatar-fire{width:54px;height:54px}
+  main{padding-left:10px;padding-right:10px}
+  .hero-fire{margin-left:4px;margin-right:4px}
+  .grid{grid-template-columns:1fr 1fr}
+  .fire-grid{grid-template-columns:repeat(3,1fr)!important}
+  .nav{border-radius:24px}
+}
+
 </style>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
 <div class="app">
-<div class="top"><div class="topicon">‹</div><div class="brand">POLIXO<small>PLAY • EARN • WITHDRAW</small></div><div class="topicon">⋮</div></div>
-
-<section id="home" class="page active">
-<div class="card profile"><div class="user"><div class="avatar">👤</div><div class="name"><b>پولیکس</b><span id="username">@کاربر</span></div></div><div class="balance">💰 <b id="balance">۰</b><span> تومان</span><small>≈ $0.00</small></div></div>
-<div class="card hero"><h1>به پولیکس خوش آمدید!</h1><p class="muted">بازی کنید، جایزه بگیرید و دوستانتان را دعوت کنید.</p><button class="btn gold" onclick="go('wheel')">🎮 شروع بازی</button><div class="chest">🪙</div></div>
-<div class="title">بازی‌ها و امکانات</div><div class="quick">
-<div class="tile" onclick="go('wheel')"><div class="ico">🎡</div><b>گردونه شانس</b><small>۷ جایزه ویژه</small></div>
-<div class="tile" onclick="go('dice')"><div class="ico">🎲</div><b>جفت شیش</b><small>تا ۵ میلیون تومان</small></div>
-<div class="tile" onclick="go('buy')"><div class="ico">🛒</div><b>خرید</b><small>بسته‌های گردونه</small></div>
-<div class="tile" onclick="go('invite')"><div class="ico">👥</div><b>دعوت دوستان</b><small>هر نفر +۸ گردونه</small></div>
-<div class="tile" onclick="go('tasks')"><div class="ico">📋</div><b>مأموریت‌ها</b><small>پاداش ویژه</small></div>
-<div class="tile" onclick="go('withdraw')"><div class="ico">💳</div><b>برداشت</b><small>تومان و TRX</small></div>
-</div>
-<div class="card"><div class="stats"><div class="stat">🎡<b id="wheels">۰</b><small>گردونه</small></div><div class="stat">🎲<b id="dice">۰</b><small>تاس</small></div><div class="stat">👥<b id="refs">۰</b><small>دعوت</small></div></div></div>
-<div class="card"><b>📣 اطلاعیه</b><p class="muted">به پولیکس خوش آمدید 🎉</p></div>
+<header class="top"><button class="topbtn">⌄</button><div class="brand"><b>POLIXO</b><small>PLAY • EARN • WITHDRAW</small></div><button class="topbtn">☰</button></header>
+<div class="user"><div class="avatar">👤</div><div class="uinfo"><b>پولیکس</b><span id="uname">@کاربر</span></div><div class="money"><strong>۰ تومان</strong>موجودی</div></div>
+<main>
+<section class="page active" id="home">
+  <div class="cinematic-head">
+    <div class="brand-fire"><span class="crown">♛</span><b>POLIXO</b></div>
+    <div class="tagline">PLAY • EARN • WITHDRAW</div>
+  </div>
+  <div class="profile-fire card">
+    <div class="avatar-fire">♟</div>
+    <div class="profile-copy"><b id="uname">کاربر</b><span>کاربر ویژه</span></div>
+    <div class="balance-fire"><small>موجودی شما</small><strong>۰ تومان</strong><span>🪙</span></div>
+  </div>
+  <div class="hero-fire">
+    <div class="fire-orb orb1"></div><div class="fire-orb orb2"></div>
+    <div class="spark s1">✦</div><div class="spark s2">✧</div><div class="spark s3">✦</div>
+    <div class="treasure">♛</div>
+    <div class="hero-copy">
+      <h1>به پولیکس خوش آمدید!</h1>
+      <p>با بازی کردن امتیاز جمع کنید<br>و جوایز واقعی بگیرید.</p>
+      <button class="gold fire-btn" onclick="go('wheel')">شروع بازی <span>▶</span></button>
+    </div>
+  </div>
+  <h2 class="section fire-title">بازی‌ها و امکانات</h2>
+  <div class="grid fire-grid">
+    <div class="tile fire-tile" onclick="go('wheel')"><span class="icon">🎡</span><h3>گردونه شانس</h3><p>هر بار شانس بیشتر</p></div>
+    <div class="tile fire-tile" onclick="go('dice')"><span class="icon">🎲</span><h3>جفت شیش</h3><p>تا ۵ میلیون تومان</p></div>
+    <div class="tile fire-tile" onclick="go('shop')"><span class="icon">🛒</span><h3>خرید</h3><p>بسته‌های ویژه</p></div>
+    <div class="tile fire-tile" onclick="go('tasks')"><span class="icon">☑️</span><h3>تسک‌ها</h3><p>ماموریت‌های روزانه</p></div>
+    <div class="tile fire-tile" onclick="go('invite')"><span class="icon">👥</span><h3>دعوت</h3><p>پاداش دوستان</p></div>
+    <div class="tile fire-tile" onclick="go('withdraw')"><span class="icon">💳</span><h3>برداشت</h3><p>به کیف پول شما</p></div>
+  </div>
+  <div class="gift-banner" onclick="go('invite')">
+    <div class="gift-icon">🎁</div><div><b>با دعوت دوستان جایزه بگیر!</b><span>هر دعوت موفق = ۸ گردونه</span></div><strong>←</strong>
+  </div>
 </section>
 
-<section id="wheel" class="page">
-<div class="title">🎡 گردونه شانس</div><div class="card wheelcard"><div class="pointer">▼</div><div class="wheel-wrap"><div id="wheelEl" class="wheel"><span class="wheel-label wl1">۲۷۰,۰۰۰<br>تومان</span><span class="wheel-label wl2">پوچ</span><span class="wheel-label wl3">۳۰,۰۰۰<br>تومان</span><span class="wheel-label wl4">۵ تاس</span><span class="wheel-label wl5">۸ تاس</span><span class="wheel-label wl6">۱۴ تاس</span><span class="wheel-label wl7">۲ گردونه</span></div></div><button class="btn gold full" onclick="spin()">چرخاندن گردونه</button><p id="wheelMsg" class="muted">گردونه شما: <b id="wheelCount">۰</b></p></div>
-<div class="card"><b>جوایز</b><div class="prizes">
-<div class="prize">🪙 <strong>۲۷۰,۰۰۰ تومان</strong></div><div class="prize">❌ <strong>پوچ</strong></div>
-<div class="prize">🪙 <strong>۳۰,۰۰۰ تومان</strong></div><div class="prize">🎲 <strong>۵ تاس</strong></div>
-<div class="prize">🎲 <strong>۸ تاس</strong></div><div class="prize">🎲 <strong>۱۴ تاس</strong></div>
-<div class="prize">🎡 <strong>۲ گردونه</strong></div></div></div>
-</section>
+<section class="page" id="wheel"><div class="hero"><h1>گردونه شانس 🎡</h1><p>شانس خودت را امتحان کن</p></div><div class="guide"><b>✨ راهنمای این بخش</b><p>جوایز مستقیماً روی گردونه قرار گرفته‌اند؛ نتیجه در نسخه نمایشی تصادفی است.</p></div><div class="card wheelbox"><div class="pointer">▼</div><div class="wheel" id="wheel"><div class="pr"><span class="p1">۲۷۰,۰۰۰ تومان</span><span class="p2">پوچ</span><span class="p3">۳۰,۰۰۰ تومان</span><span class="p4">۵ تاس</span><span class="p5">۸ تاس</span><span class="p6">۱۴ تاس</span><span class="p7">۲ گردونه</span></div></div><button class="gold" onclick="spin()">چرخاندن گردونه 🎡</button></div></section>
 
-<section id="dice" class="page">
-<div class="title">🎲 بازی جفت شیش</div>
-<div class="card dicebox"><p class="muted">دو تاس بینداز؛ اگر جفت بیاید، جایزه همان جفت را می‌بری.</p>
-<div class="dice-stage-final"><div class="dice-title-final">🎲 دو تاس بازی</div><div class="dicepair"><div id="d1" class="die">⚄</div><div id="d2" class="die">⚄</div></div>
-<div id="diceResult" class="result">آماده‌ای؟</div><div id="dicePrize" class="jackpot"></div>
-<button class="btn gold full" onclick="rollDice()">🎲 پرتاب دو تاس</button><p class="muted">تاس‌های شما: <b id="diceCount">۰</b></p></div>
-<div class="card"><b>جدول جوایز جفت</b><div class="prizes" style="margin-top:10px">
-<div class="prize">🎲🎲 جفت ۶ <strong>۵,۰۰۰,۰۰۰ تومان</strong></div><div class="prize">🎲🎲 جفت ۵ <strong>۴,۰۰۰,۰۰۰ تومان</strong></div>
-<div class="prize">🎲🎲 جفت ۴ <strong>۳,۰۰۰,۰۰۰ تومان</strong></div><div class="prize">🎲🎲 جفت ۳ <strong>۲,۰۰۰,۰۰۰ تومان</strong></div>
-<div class="prize">🎲🎲 جفت ۲ <strong>۱,۰۰۰,۰۰۰ تومان</strong></div><div class="prize">🎲🎲 جفت ۱ <strong>۵۰۰,۰۰۰ تومان</strong></div>
-<div class="prize">🎲 دو عدد غیرجفت <strong>بدون جایزه</strong></div></div></div>
-</section>
+<section class="page" id="dice"><div class="hero"><h1>جفت شیش 🎲</h1><p>دو تاس بینداز و جایزه بگیر</p></div><div class="guide"><b>✨ جوایز</b><p>جفت ۶: ۵ میلیون • جفت ۵: ۴ میلیون • جفت ۴: ۳ میلیون • جفت ۳: ۲ میلیون • جفت ۲: ۱ میلیون • جفت ۱: ۵۰۰ هزار تومان</p></div><div class="card"><div class="dice"><div class="die" id="d1"></div><div class="die" id="d2"></div></div><button class="gold" style="display:block;margin:auto" onclick="roll()">🎲 انداختن تاس</button><p id="result" class="mini" style="text-align:center"></p></div></section>
 
-<section id="buy" class="page"><div class="title">🛒 خرید گردونه</div>
-<div class="card package"><div><b>۱۰ TRX</b><span>۱۱ گردونه</span></div><button class="btn gold" onclick="pay(10,11)">انتخاب</button></div>
-<div class="card package"><div><b>۲۰ TRX</b><span>۲۱ گردونه</span></div><button class="btn gold" onclick="pay(20,21)">انتخاب</button></div>
-<div class="card package"><div><b>۳۰ TRX</b><span>۳۱ گردونه</span></div><button class="btn gold" onclick="pay(30,31)">انتخاب</button></div>
-<div class="card"><b>آدرس پرداخت TRON</b><div class="link" style="margin-top:10px">TBov6BQkMbsVmwHE7GbPvD2KG1KBqNqemi</div><p class="muted">پس از پرداخت واقعی، تراکنش باید توسط سرور تأیید شود؛ قبل از تأیید هیچ گردونه‌ای اضافه نمی‌شود.</p></div></section>
+<section class="page" id="shop"><div class="hero"><h1>خرید شانس</h1><p>بسته موردنظر را انتخاب کن</p></div><div class="card"><h2>بسته‌های گردونه</h2>
+<div class="package"><div><strong>۱۱ گردونه</strong><div class="mini">۱۰ TRX</div></div><button class="darkbtn" onclick="toast('پرداخت واقعی هنوز متصل نیست')">خرید</button></div>
+<div class="package"><div><strong>۲۱ گردونه</strong><div class="mini">۲۰ TRX</div></div><button class="darkbtn" onclick="toast('پرداخت واقعی هنوز متصل نیست')">خرید</button></div>
+<div class="package"><div><strong>۳۱ گردونه</strong><div class="mini">۳۰ TRX</div></div><button class="darkbtn" onclick="toast('پرداخت واقعی هنوز متصل نیست')">خرید</button></div></div>
+<div class="guide"><b>آدرس TRON</b><p>TBov6BQkMbsVmwHE7GbPvD2KG1KBqNqemi</p></div></section>
 
-<section id="invite" class="page"><div class="title">👥 دعوت دوستان</div><div class="card"><b>هر دعوت موفق = ۸ گردونه 🎁</b><p class="muted">لینک اختصاصی شما:</p><div id="refLink" class="link"></div><button class="btn gold full" style="margin-top:10px" onclick="copyRef()">کپی لینک</button></div><div class="card"><div class="stats"><div class="stat">👥<b id="r1">۰</b><small>دعوت موفق</small></div><div class="stat">🎡<b id="r2">۰</b><small>پاداش گردونه</small></div></div></div></section>
+<section class="page" id="tasks"><div class="hero"><h1>تسک‌ها ☑️</h1><p>با انجام کارهای ساده جایزه بگیر</p></div><div class="task"><div><h2>ربات بازی</h2><p class="mini">وارد ربات زیر شوید و فعالش کنید؛ ۵ گردونه + ۲ تاس برنده شوید 🎁</p></div><span>🎁</span><button class="darkbtn" onclick="window.open('https://t.me/plus_game_bot?start=02361074727','_blank')">ورود</button></div></section>
 
-<section id="tasks" class="page"><div class="title">📋 مأموریت‌ها</div><div class="card"><b>فعال‌سازی ربات</b><p class="muted">وارد ربات زیر شوید و فعالش کنید؛ ۵ گردونه + ۲ تاس برنده شوید 🎁</p><button class="btn gold full" onclick="window.open('https://t.me/plus_game_bot?start=02361074727','_blank')">ورود به ربات</button><button class="btn full" style="margin-top:8px" onclick="alert('در نسخه نهایی انجام مأموریت از سمت سرور بررسی می‌شود.')">بررسی مأموریت</button></div></section>
+<section class="page" id="invite"><div class="hero"><h1>دعوت دوستان 👥</h1><p>هر دعوت موفق = ۸ گردونه</p></div><div class="card"><h2>لینک دعوت شما</h2><input id="ref" readonly><button class="gold" onclick="copyRef()">📋 کپی لینک</button><p class="mini">پاداش واقعی دعوت باید در سرور ثبت شود.</p></div></section>
 
-<section id="withdraw" class="page"><div class="title">💳 برداشت</div><div class="card"><b>حداقل برداشت تومان: ۱۰,۰۰۰,۰۰۰</b><p class="muted">نوع برداشت را انتخاب کنید.</p><select id="withdrawType"><option>تومان</option><option>TRX</option></select><input id="amount" type="number" placeholder="مبلغ"><input id="address" placeholder="شماره کارت یا آدرس TRX"><button class="btn gold full" onclick="withdraw()">ثبت درخواست</button></div></section>
-
-<section id="profile" class="page"><div class="title">👤 پروفایل</div><div class="card"><p>شناسه کاربر: <b id="uid">دمو</b></p><p>موجودی: <b id="pbal">۰</b> تومان</p><p>گردونه: <b id="pwheel">۰</b></p><p>تاس: <b id="pdice">۰</b></p><p>دعوت موفق: <b id="pref">۰</b></p></div></section>
-</div>
-
-<div class="nav"><div class="navin">
-<button data-page="home" class="active" onclick="go('home')"><i>⌂</i>خانه</button>
-<button data-page="wheel" onclick="go('wheel')"><i>◉</i>گردونه</button>
-<button data-page="dice" onclick="go('dice')"><i>🎲</i>جفت شیش</button>
-<button data-page="buy" onclick="go('buy')"><i>▣</i>خرید</button>
-<button data-page="invite" onclick="go('invite')"><i>♧</i>دعوت</button>
-</div></div>
+<section class="page" id="withdraw"><div class="hero"><h1>برداشت 💳</h1><p>حداقل برداشت ۱۰,۰۰۰,۰۰۰ تومان</p></div><div class="card"><h2>مشخصات برداشت</h2><input placeholder="نام و نام خانوادگی"><input placeholder="آدرس کیف پول TRON / TRC20"><input placeholder="مبلغ به تومان" type="number"><button class="gold" onclick="toast('برداشت واقعی هنوز متصل نیست')">درخواست برداشت ←</button></div></section>
+</main>
+<nav class="nav">
+<button class="on" data-p="home" onclick="go('home')"><b>⌂</b>خانه</button><button data-p="wheel" onclick="go('wheel')"><b>◉</b>گردونه</button><button data-p="dice" onclick="go('dice')"><b>⚄</b>جفت شیش</button><button data-p="shop" onclick="go('shop')"><b>▣</b>خرید</button><button data-p="tasks" onclick="go('tasks')"><b>☑</b>تسک‌ها</button><button data-p="withdraw" onclick="go('withdraw')"><b>▣</b>برداشت</button><button data-p="invite" onclick="go('invite')"><b>♧</b>دعوت</button>
+</nav><div class="toast" id="toast"></div></div>
+<script>
+function go(p){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(p).classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('on',x.dataset.p===p));scrollTo({top:0,behavior:'smooth'})}
+function toast(t){let x=document.getElementById('toast');x.textContent=t;x.style.display='block';setTimeout(()=>x.style.display='none',2200)}
+function dots(n){let m={1:[4],2:[0,8],3:[0,4,8],4:[0,2,6,8],5:[0,2,4,6,8],6:[0,2,3,5,6,8]};return '<div class="dots">'+Array.from({length:9},(_,i)=>'<i class="pip '+(m[n].includes(i)?'':'hide')+'"></i>').join('')+'</div>'}
+document.getElementById('d1').innerHTML=dots(1);document.getElementById('d2').innerHTML=dots(1);
+function roll(){let a=1+Math.floor(Math.random()*6),b=1+Math.floor(Math.random()*6);document.getElementById('d1').innerHTML=dots(a);document.getElementById('d2').innerHTML=dots(b);let r=a===b?({6:'۵,۰۰۰,۰۰۰',5:'۴,۰۰۰,۰۰۰',4:'۳,۰۰۰,۰۰۰',3:'۲,۰۰۰,۰۰۰',2:'۱,۰۰۰,۰۰۰',1:'۵۰۰,۰۰۰'}[a]+' تومان'): 'بدون جایزه';document.getElementById('result').textContent='نتیجه: '+a+' و '+b+' — '+r;toast(r)}
+function spin(){let w=document.getElementById('wheel');w.animate([{transform:'rotate(0deg)'},{transform:'rotate(1440deg)'}],1500,{easing:'cubic-bezier(.12,.8,.2,1)'});setTimeout(()=>toast('نتیجه گردونه در نسخه نمایشی مشخص شد'),1550)}
+let uid=window.Telegram?.WebApp?.initDataUnsafe?.user?.id||Math.floor(Math.random()*999999);document.getElementById('ref').value='https://t.me/Plexinocf_bot?start=ref_'+uid;
+function copyRef(){navigator.clipboard?.writeText(document.getElementById('ref').value);toast('لینک دعوت کپی شد')}
+if(window.Telegram?.WebApp){Telegram.WebApp.ready();Telegram.WebApp.expand();let u=Telegram.WebApp.initDataUnsafe.user;if(u)document.getElementById('uname').textContent='@'+(u.username||u.first_name||'کاربر')}
+</script>
 
 <script>
-let S=JSON.parse(localStorage.getItem('polixo3')||'{"balance":0,"wheels":0,"dice":0,"refs":0}');
-const faces=['⚀','⚁','⚂','⚃','⚄','⚅'];
-const doublePrize={6:5000000,5:4000000,4:3000000,3:2000000,2:1000000,1:500000};
-function fa(n){return Number(n).toLocaleString('fa-IR')}
-function save(){localStorage.setItem('polixo3',JSON.stringify(S));render()}
-function render(){
- const ids={balance:fa(S.balance),wheels:fa(S.wheels),dice:fa(S.dice),refs:fa(S.refs),wheelCount:fa(S.wheels),diceCount:fa(S.dice),r1:fa(S.refs),r2:fa(S.refs*8),pbal:fa(S.balance),pwheel:fa(S.wheels),pdice:fa(S.dice),pref:fa(S.refs)};
- for(const [id,v] of Object.entries(ids)){let e=document.getElementById(id);if(e)e.textContent=v}
- let u=window.Telegram?.WebApp?.initDataUnsafe?.user;
- if(u){document.getElementById('username').textContent='@'+(u.username||u.first_name||'کاربر');document.getElementById('uid').textContent=u.id}
- document.getElementById('refLink').textContent=u?'https://t.me/Plexinocf_bot?start=ref_'+u.id:'https://t.me/Plexinocf_bot?start=ref_demo';
-}
-function go(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));scrollTo(0,0)}
-function spin(){
- if(S.wheels<1){document.getElementById('wheelMsg').textContent='❌ گردونه کافی ندارید.';return}
- S.wheels--;save();let n=Math.floor(Math.random()*7),deg=1440+(360-(n*360/7+25))+Math.random()*35;
- document.getElementById('wheelEl').style.transform='rotate('+deg+'deg)';
- setTimeout(()=>{const p=[270000,0,30000,0,0,0,0][n];const d=[0,0,0,5,8,14,0][n];const w=[0,0,0,0,0,0,2][n];S.balance+=p;S.dice+=d;S.wheels+=w;save();const text=['۲۷۰,۰۰۰ تومان','پوچ','۳۰,۰۰۰ تومان','۵ تاس','۸ تاس','۱۴ تاس','۲ گردونه'][n];document.getElementById('wheelMsg').innerHTML='🎉 جایزه شما: <b>'+text+'</b>'},4100)
-}
-function rollDice(){
- if(S.dice<1){document.getElementById('diceResult').textContent='❌ تاس کافی ندارید';return}
- S.dice--;let a=1+Math.floor(Math.random()*6),b=1+Math.floor(Math.random()*6),x=document.getElementById('d1'),y=document.getElementById('d2');x.classList.add('shake');y.classList.add('shake');document.getElementById('dicePrize').textContent='';document.getElementById('diceResult').textContent='در حال پرتاب...';
- setTimeout(()=>{x.classList.remove('shake');y.classList.remove('shake');x.textContent=faces[a-1];y.textContent=faces[b-1];if(a===b){let prize=doublePrize[a];S.balance+=prize;document.getElementById('diceResult').textContent='🎉 جفت '+a+' آوردی!';document.getElementById('dicePrize').textContent='💰 جایزه: '+fa(prize)+' تومان'}else{document.getElementById('diceResult').textContent='این بار جفت نشد 😅';document.getElementById('dicePrize').textContent=a+' + '+b+' = بدون جایزه'}save()},800)
-}
-function pay(a,w){alert('بسته '+a+' TRX انتخاب شد. در نسخه نهایی پس از تأیید تراکنش واقعی، '+w+' گردونه اضافه می‌شود.')}
-function copyRef(){navigator.clipboard?.writeText(document.getElementById('refLink').textContent);alert('لینک کپی شد')}
-function withdraw(){let t=document.getElementById('withdrawType').value,a=+document.getElementById('amount').value;if(t==='تومان'&&a<10000000){alert('حداقل برداشت ۱۰,۰۰۰,۰۰۰ تومان است');return}alert('درخواست ثبت شد؛ در نسخه نهایی توسط سرور بررسی می‌شود.')}
-render();if(window.Telegram?.WebApp){Telegram.WebApp.ready();Telegram.WebApp.expand()}
+(function(){
+  if (window.Telegram && Telegram.WebApp) {
+    const tg = Telegram.WebApp;
+    try {
+      tg.ready();
+      tg.expand();
+      if (tg.setHeaderColor) tg.setHeaderColor('#03070d');
+      if (tg.setBackgroundColor) tg.setBackgroundColor('#020305');
+      if (tg.enableClosingConfirmation) tg.disableClosingConfirmation();
+    } catch(e) {}
+  }
+})();
 </script>
-</body></html>
+
+</body>
+</html>
